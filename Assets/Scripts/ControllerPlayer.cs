@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class ControllerPlayer : MonoBehaviour
 {
+
     // Start is called before the first frame update
+    public SOtest A = new SOtest();
     void Start()
     {
         
@@ -13,7 +15,10 @@ public class ControllerPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            A.disHp();
+        }
     }
 }
 public interface CharaterController
@@ -26,6 +31,7 @@ public interface CharaterController
 }
 public class CharaActionStatus
 {
+
     //地面上(地面、空中)
     public enum StatusGround
     {
