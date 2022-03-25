@@ -4,9 +4,18 @@ using UnityEngine;
 
 public class ControllerPlayer : MonoBehaviour
 {
-
+    public static ControllerPlayer controllerPlayer;
+    private void Awake()
+    {
+        if (controllerPlayer == null)
+        {
+            controllerPlayer = this;
+            DontDestroyOnLoad(this);
+        }
+        else
+            Destroy(this);
+    }
     // Start is called before the first frame update
-    public SOtest A = new SOtest();
     void Start()
     {
         
@@ -15,10 +24,7 @@ public class ControllerPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            A.disHp();
-        }
+
     }
 }
 public interface CharaterController

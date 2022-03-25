@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ba3b9fe1526e9449801005d57fe7bfb, type: 3}
-  m_Name: EliteTestSkillDataSo
+  m_Script: {fileID: 11500000, guid: c7e384cc13ff21f4ab2710a2accc3173, type: 3}
+  m_Name: Unity-Chan
   m_EditorClassIdentifier: 
-  Hp: 1000
+  sTargetName: DefaultName
+  iTargetHP: 0
+  iTargetDen: 0
