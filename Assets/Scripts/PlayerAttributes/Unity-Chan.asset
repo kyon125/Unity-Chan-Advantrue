@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7e384cc13ff21f4ab2710a2accc3173, type: 3}
   m_Name: Unity-Chan
   m_EditorClassIdentifier: 
-  sTargetName: DefaultName
-  iTargetHP: 0
-  iTargetDen: 0
+  sTargetName: UnityChan
+  iTargetHP: 10

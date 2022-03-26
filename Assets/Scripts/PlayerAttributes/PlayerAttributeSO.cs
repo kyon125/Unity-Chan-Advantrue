@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "CreateAttributes/CharaAttributes", fileName = "newCharaAttributes")]
-public class CreatePlayerAttributeSO : ScriptableObject , CharaBasicalBehavior
+public class PlayerAttributeSO : ScriptableObject , CharaBasicalBehavior
 {
     [SerializeField]
     private string sTargetName = "DefaultName";

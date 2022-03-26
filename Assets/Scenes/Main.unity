@@ -601,6 +601,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06081046c4ce82b499acc05ca1fd85fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1786931001}
+  playerRigidbody2D: {fileID: 1786931002}
+  raycastLeftValue: {x: -0.4, y: -1}
+  raycastCenterValue: {x: 0, y: -1.07}
+  raycastRightValue: {x: 0.4, y: -1}
+  fDistance: 0.25
+  fDistanceCenter: 0.3
 --- !u!4 &1194122472
 Transform:
   m_ObjectHideFlags: 0
@@ -639,6 +646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a095a2b8055cae84f88eb63edff644d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerAttributeSO: {fileID: 11400000, guid: d69a7c6315b17ec4791a42456f1f6dd1, type: 2}
 --- !u!1 &1328294504
 GameObject:
   m_ObjectHideFlags: 0
@@ -1007,7 +1015,7 @@ MonoBehaviour:
     ModeOverride: 1
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.777311, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

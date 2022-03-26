@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerStatusMgr : MonoBehaviour
 {
     public static PlayerStatusMgr playerStatusMgr;
+    public PlayerAttributeSO playerAttributeSO;
     //public CreatePlayerAttributeSO
     private void Awake()
     {
