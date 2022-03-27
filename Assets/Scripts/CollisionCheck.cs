@@ -19,7 +19,6 @@ public class CollisionCheck : MonoBehaviour
     public float fDistance;
     public float fDistanceCenter;
 
-    private bool onGround;
     void Start()
     {
         Debug.Log(Physics2D.gravity);
@@ -38,12 +37,12 @@ public class CollisionCheck : MonoBehaviour
         raycastHitRight = Physics2D.Raycast(new Vector2(player.transform.position.x + raycastRightValue.x, player.transform.position.y + raycastRightValue.y), Vector2.down, fDistance, 1 << 8);
         if (raycastHitLeft == true || raycastHitCenter == true || raycastHitRight == true)
         {
-            onGround = true;
+            PlayerStatusMgr.instance.playerStatusGround = StatusGround.onGround;
             Debug.Log("onGround is true");
         }
         else if (raycastHitLeft == false && raycastHitCenter == false && raycastHitRight == false)
         {
-            onGround = false;
+            PlayerStatusMgr.instance.playerStatusGround = StatusGround.onAir;
             Debug.Log("onGround is false");
         }
 

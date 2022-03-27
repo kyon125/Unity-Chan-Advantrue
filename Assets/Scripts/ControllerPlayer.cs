@@ -2,14 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ControllerPlayer : MonoBehaviour
+public class ControllerPlayer : MonoBehaviour , CharaterController
 {
-    public static ControllerPlayer controllerPlayer;
+    public static ControllerPlayer instance;
+    public Rigidbody2D PlayerRigibody;
+    public float fMaxWalkHorizontalSpeed;
+    public float fMaxRunHorizontalSpeed;
+
+    private float fHorizontalMove;
     private void Awake()
     {
-        if (controllerPlayer == null)
+        if (instance == null)
         {
-            controllerPlayer = this;
+            instance = this;
             DontDestroyOnLoad(this);
         }
         else
@@ -24,39 +29,58 @@ public class ControllerPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetButton("Horizontal"))
+        {
+            
+        }
+        else
+        {            
+            Debug.Log("Button was released");            
+            PlayerRigibody.velocity = new Vector2(0, PlayerRigibody.velocity.y);
+        }
+    }
+    private void FixedUpdate()
+    {
+        Move();
+    }
+    public void Jump(float speed)
+    {
+        throw new System.NotImplementedException();
+    }
 
+    public void Move()
+    {
+        float currentLimitSpeed;
+        if (Input.GetButton("Horizontal") && Input.GetButton("Run"))
+        {
+            Debug.Log("Running");
+            currentLimitSpeed = fMaxRunHorizontalSpeed;
+        }
+        else 
+            currentLimitSpeed = fMaxWalkHorizontalSpeed;
+
+
+        if (Input.GetButton("Horizontal") && Input.GetAxis("Horizontal") > 0)
+        {
+            PlayerRigibody.transform.localScale = new Vector3(1, 1, 1);
+            PlayerRigibody.velocity = new Vector2(currentLimitSpeed, PlayerRigibody.velocity.y);
+        }
+        else if (Input.GetButton("Horizontal") && Input.GetAxis("Horizontal") < 0)
+        {
+            PlayerRigibody.transform.localScale = new Vector3(-1, 1, 1);
+            PlayerRigibody.velocity = new Vector2(-currentLimitSpeed, PlayerRigibody.velocity.y);
+        }
+
+        
     }
 }
 public interface CharaterController
 {
     //Player水平移動
-    public void Move(float speed);
+    public void Move();
 
     //Player跳躍
     public void Jump(float speed);
 }
-public class CharaActionStatus
-{
 
-    //地面上(地面、空中)
-    public enum StatusGround
-    {
-         onGround,
-         onAir
-    }
 
-    //基本狀態(待命、移動)
-    public enum StatusBasic
-    {
-        Idle,
-        Move
-    }
-
-    //受傷(正常、僵直、無敵)
-    public enum StatusHurt
-    {
-        Normal,
-        Stark,
-        Unbreakable
-    }
-}
