@@ -6,10 +6,13 @@ public class ControllerPlayer : MonoBehaviour , CharaterController
 {
     public static ControllerPlayer instance;
     public Rigidbody2D PlayerRigibody;
+    public Camera mainCamera;
     public float fMaxWalkHorizontalSpeed;
     public float fMaxRunHorizontalSpeed;
-
-    private float fHorizontalMove;
+    public float fJumpSpeed;
+    public float fGroundDistance;
+    private float fCurrentLimitSpeed;
+    private float fJumpStartPoint;
     private void Awake()
     {
         if (instance == null)
@@ -29,49 +32,82 @@ public class ControllerPlayer : MonoBehaviour , CharaterController
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButton("Horizontal"))
-        {
-            
-        }
-        else
-        {            
-            Debug.Log("Button was released");            
-            PlayerRigibody.velocity = new Vector2(0, PlayerRigibody.velocity.y);
-        }
+        Jump();
+        Move();
+        Attack();
+        PlayerFaceDirection();
     }
     private void FixedUpdate()
     {
-        Move();
+        PlayerRigibody.velocity = new Vector2(fCurrentLimitSpeed, PlayerRigibody.velocity.y);
     }
-    public void Jump(float speed)
+    public void Jump()
     {
-        throw new System.NotImplementedException();
+        fGroundDistance = PlayerRigibody.transform.position.y - fJumpStartPoint;
+        if (Input.GetButtonDown("Jump") && PlayerStatusMgr.instance.playerStatusGround == StatusGround.onGround)
+        {
+            fJumpStartPoint = PlayerRigibody.transform.position.y;
+            Debug.Log("jumping");
+            PlayerRigibody.velocity = new Vector2(PlayerRigibody.velocity.x, fJumpSpeed);
+        }
+        else if (Input.GetButtonUp("Jump"))
+        {
+            PlayerRigibody.velocity = PlayerRigibody.velocity * new Vector2(1, .5f);
+        }
+        if (PlayerStatusMgr.instance.playerStatusGround == StatusGround.onGround)
+            fGroundDistance = 0;        
     }
 
     public void Move()
     {
-        float currentLimitSpeed;
-        if (Input.GetButton("Horizontal") && Input.GetButton("Run"))
-        {
-            Debug.Log("Running");
-            currentLimitSpeed = fMaxRunHorizontalSpeed;
-        }
-        else 
-            currentLimitSpeed = fMaxWalkHorizontalSpeed;
-
-
         if (Input.GetButton("Horizontal") && Input.GetAxis("Horizontal") > 0)
         {
-            PlayerRigibody.transform.localScale = new Vector3(1, 1, 1);
-            PlayerRigibody.velocity = new Vector2(currentLimitSpeed, PlayerRigibody.velocity.y);
+            //PlayerRigibody.transform.localScale = new Vector3(1, 1, 1);
+            if (Input.GetButton("Run"))
+                fCurrentLimitSpeed = fMaxRunHorizontalSpeed;
+            else
+                fCurrentLimitSpeed = fMaxWalkHorizontalSpeed;
         }
         else if (Input.GetButton("Horizontal") && Input.GetAxis("Horizontal") < 0)
         {
-            PlayerRigibody.transform.localScale = new Vector3(-1, 1, 1);
-            PlayerRigibody.velocity = new Vector2(-currentLimitSpeed, PlayerRigibody.velocity.y);
+            //PlayerRigibody.transform.localScale = new Vector3(-1, 1, 1);
+            if (Input.GetButton("Run"))
+                fCurrentLimitSpeed = -fMaxRunHorizontalSpeed;
+            else
+                fCurrentLimitSpeed = -fMaxWalkHorizontalSpeed;
         }
-
-        
+        else
+        {
+            Debug.Log("Button was released");
+            fCurrentLimitSpeed = 0;            
+        }
+    }
+    public void Attack()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            AnimationPlayer.instance.CallAttackAnimation("Attack1");
+            Debug.Log("Attack!");
+        }
+    }
+    public void PlayerFaceDirection()
+    {
+        if (CheckMousePos() >= 0)
+        {
+            Debug.Log("·Æ¹«¦b¥kÃä");
+            PlayerRigibody.transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (CheckMousePos() < 0)
+        {
+            Debug.Log("·Æ¹«¦b¥ªÃä");
+            PlayerRigibody.transform.localScale = new Vector3(-1, 1, 1);
+        }
+    }
+    public float CheckMousePos()
+    {
+        Vector3 mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        float value = mousePos.x - PlayerRigibody.transform.position.x;
+        return value;
     }
 }
 public interface CharaterController
@@ -80,7 +116,7 @@ public interface CharaterController
     public void Move();
 
     //Player¸õÅD
-    public void Jump(float speed);
+    public void Jump();
 }
 
 

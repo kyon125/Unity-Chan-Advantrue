@@ -565,6 +565,8 @@ MonoBehaviour:
   PlayerRigibody: {fileID: 1786931002}
   fMaxWalkHorizontalSpeed: 2
   fMaxRunHorizontalSpeed: 4
+  fJumpSpeed: 4
+  fGroundDistance: 0
 --- !u!114 &1194122474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1293,7 +1295,7 @@ MonoBehaviour:
     ModeOverride: 1
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7784172, y: 1}
+    m_SensorSize: {x: 2.5824468, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

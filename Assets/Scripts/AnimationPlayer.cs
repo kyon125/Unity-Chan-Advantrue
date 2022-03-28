@@ -6,9 +6,17 @@ public class AnimationPlayer : MonoBehaviour
 {
 
     // Start is called before the first frame update
+    public static AnimationPlayer instance;
     public Rigidbody2D playerRigibody;
     public Animator playerAnimator;
     private float fPlayerSpeed;
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(this);
+    }
     void Start()
     {
         
@@ -17,9 +25,10 @@ public class AnimationPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckPlayerStatus();
+        CheckPlayerWalk();
+        CheckPlayerJump();
     }
-    public void CheckPlayerStatus()
+    public void CheckPlayerWalk()
     {
         fPlayerSpeed = playerRigibody.velocity.x;
         if (fPlayerSpeed != 0)
@@ -48,17 +57,14 @@ public class AnimationPlayer : MonoBehaviour
                     break;
             }
         }
-
-            
-
-        //switch (PlayerStatusMgr.instance.playerStatusBasic)
-        //{
-        //    case StatusBasic.Idle:
-        //        break;
-        //    case StatusBasic.Move:
-        //        break;
-        //    default:
-        //        break;
-        //}
+    }
+    public void CallAttackAnimation(string attackname)
+    {
+        playerAnimator.SetBool(attackname, true);
+    }
+    public void CheckPlayerJump()
+    {
+        playerAnimator.SetFloat("GroundDistance", ControllerPlayer.instance.fGroundDistance);
+        playerAnimator.SetFloat("FallSpeed", ControllerPlayer.instance.PlayerRigibody.velocity.y);
     }
 }
