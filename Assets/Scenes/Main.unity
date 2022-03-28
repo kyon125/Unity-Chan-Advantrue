@@ -563,6 +563,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerRigibody: {fileID: 1786931002}
+  mainCamera: {fileID: 237245177}
   fMaxWalkHorizontalSpeed: 2
   fMaxRunHorizontalSpeed: 4
   fJumpSpeed: 4
