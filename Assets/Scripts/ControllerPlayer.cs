@@ -13,6 +13,9 @@ public class ControllerPlayer : MonoBehaviour , CharaterController
     public float fGroundDistance;
     private float fCurrentLimitSpeed;
     private float fJumpStartPoint;
+    public float fAttackInterval;
+    private float fAttackIntervalTimer;
+    public bool attackInterval;
     private void Awake()
     {
         if (instance == null)
@@ -83,11 +86,22 @@ public class ControllerPlayer : MonoBehaviour , CharaterController
         }
     }
     public void Attack()
-    {
-        if (Input.GetButtonDown("Fire1"))
+    {        
+        if (Input.GetButtonDown("Fire1")&& attackInterval == false)
         {
             AnimationPlayer.instance.CallAttackAnimation("Attack1");
+            fAttackIntervalTimer = 0;
+            attackInterval = true;
             Debug.Log("Attack!");
+        }
+        //³]©w§ðÀ»¶¡¹j
+        if (attackInterval == true)
+        {
+            fAttackIntervalTimer += Time.deltaTime;
+            if (fAttackIntervalTimer >= fAttackInterval)
+            {
+                attackInterval = false;
+            }
         }
     }
     public void PlayerFaceDirection()
