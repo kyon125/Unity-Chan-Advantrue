@@ -62,6 +62,10 @@ public class AnimationPlayer : MonoBehaviour
     {
         playerAnimator.SetBool(attackname, true);
     }
+    public void CancelAttackAnimation(string attackname)
+    {
+        playerAnimator.SetBool(attackname, false);
+    }
     public void CheckPlayerJump()
     {
         playerAnimator.SetFloat("GroundDistance", ControllerPlayer.instance.fGroundDistance);

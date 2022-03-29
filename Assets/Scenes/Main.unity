@@ -600,8 +600,15 @@ MonoBehaviour:
   fMaxRunHorizontalSpeed: 4
   fJumpSpeed: 4
   fGroundDistance: 0
-  fAttackInterval: 1
+  fAttackInterval: 0.4
+  fLightAttackJudge: 0.52
+  fLightAttackJudge2: 0.43
+  fBatterAttackJudge: 0.7
+  fBatterAttackJudge2: 0.7
+  fCancelAttackJudge: 0
+  fAttackIntervalTimer: 0
   attackInterval: 0
+  attackStatus: 0
 --- !u!114 &1194122474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1362,7 +1369,7 @@ MonoBehaviour:
     ModeOverride: 1
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.5824468, y: 1}
+    m_SensorSize: {x: 2.464467, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

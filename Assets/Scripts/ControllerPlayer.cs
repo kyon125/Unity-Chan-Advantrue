@@ -14,8 +14,15 @@ public class ControllerPlayer : MonoBehaviour , CharaterController
     private float fCurrentLimitSpeed;
     private float fJumpStartPoint;
     public float fAttackInterval;
-    private float fAttackIntervalTimer;
+    public float fLightAttackJudge;
+    public float fLightAttackJudge2;
+    public float fBatterAttackJudge;
+    public float fBatterAttackJudge2;
+    public float fCancelAttackJudge;
+
+    public float fAttackIntervalTimer;
     public bool attackInterval;
+    public NormalAttackStatus attackStatus;
     private void Awake()
     {
         if (instance == null)
@@ -86,23 +93,132 @@ public class ControllerPlayer : MonoBehaviour , CharaterController
         }
     }
     public void Attack()
-    {        
-        if (Input.GetButtonDown("Fire1")&& attackInterval == false)
+    {
+        fAttackIntervalTimer += Time.deltaTime;
+        if (fAttackIntervalTimer >= fAttackInterval)
         {
-            AnimationPlayer.instance.CallAttackAnimation("Attack1");
-            fAttackIntervalTimer = 0;
-            attackInterval = true;
-            Debug.Log("Attack!");
+            attackInterval = false;
         }
-        //設定攻擊間隔
-        if (attackInterval == true)
+        if (fAttackIntervalTimer > fBatterAttackJudge)
         {
-            fAttackIntervalTimer += Time.deltaTime;
-            if (fAttackIntervalTimer >= fAttackInterval)
+            attackStatus = NormalAttackStatus.attackStep0;
+        }
+        if (Input.GetButtonDown("Fire1"))
+        {
+            if (attackInterval == false)
             {
-                attackInterval = false;
+                switch (attackStatus)
+                {
+                    case NormalAttackStatus.attackStep0:
+                        {
+                            AnimationPlayer.instance.CallAttackAnimation("Attack1");
+                            fAttackIntervalTimer = 0;
+                            attackInterval = true;
+                            attackStatus = NormalAttackStatus.attackStep1;
+                            Debug.Log("Attack1!");
+                        }
+                        break;
+                    case NormalAttackStatus.attackStep1:
+                        {
+                            if (fAttackIntervalTimer < fAttackInterval)
+                            {
+                                attackStatus = NormalAttackStatus.attackStep0;
+                            }
+                            else if (fAttackIntervalTimer >= fAttackInterval && fAttackIntervalTimer < fLightAttackJudge)
+                            {
+                                AnimationPlayer.instance.CancelAttackAnimation("Attack1");
+                                AnimationPlayer.instance.CallAttackAnimation("Attack1");
+                                attackStatus = NormalAttackStatus.attackStep1;
+                                fAttackIntervalTimer = 0;
+                                Debug.Log("stepAttack1!");
+                            }
+                            else if (fAttackIntervalTimer >= fLightAttackJudge && fAttackIntervalTimer < fBatterAttackJudge)
+                            {
+                                AnimationPlayer.instance.CancelAttackAnimation("Attack1");
+                                AnimationPlayer.instance.CallAttackAnimation("Attack2");
+                                attackStatus = NormalAttackStatus.attackStep2;
+                                fAttackIntervalTimer = 0;
+                                Debug.Log("stepAttack2!");
+                            }
+                        }
+                        break;
+                    case NormalAttackStatus.attackStep2:
+                        {
+                            if (fAttackIntervalTimer < fAttackInterval)
+                            {
+                                attackStatus = NormalAttackStatus.attackStep0;
+                            }
+                            else if (fAttackIntervalTimer >= fAttackInterval && fAttackIntervalTimer < fLightAttackJudge2)
+                            {
+                                AnimationPlayer.instance.CancelAttackAnimation("Attack1");
+                                AnimationPlayer.instance.CallAttackAnimation("Attack1");
+                                attackStatus = NormalAttackStatus.attackStep1;
+                                fAttackIntervalTimer = 0;
+                                Debug.Log("stepAttack1!");
+                            }
+                            else if (fAttackIntervalTimer >= fLightAttackJudge2 && fAttackIntervalTimer < fBatterAttackJudge2)
+                            {                                
+                                AnimationPlayer.instance.CallAttackAnimation("Attack3");
+                                attackStatus = NormalAttackStatus.attackStep3;
+                                fAttackIntervalTimer = 0;
+                                Debug.Log("stepAttack3!");
+                            }
+                        }
+                        break;
+                    case NormalAttackStatus.attackStep3:
+                        break;
+                    default:
+                        break;
+                }
             }
+           
         }
+
+        
+        //if (Input.GetButtonDown("Fire1")&& attackInterval == false)
+        //{
+        //    AnimationPlayer.instance.CallAttackAnimation("Attack1");
+        //    fAttackIntervalTimer = 0;
+        //    attackInterval = true;
+        //    Debug.Log("Attack!");
+        //}
+        ////設定攻擊間隔
+        //switch (attackStatus)
+        //{
+        //    case NormalAttackStatus.attackStep0:
+        //        break;
+        //    case NormalAttackStatus.attackStep1:
+        //        {
+        //            fAttackIntervalTimer += Time.deltaTime;
+        //            if (fAttackIntervalTimer >= fAttackInterval)
+        //            {
+        //                attackInterval = false;
+        //            }
+        //            if (attackInterval == true)
+        //            {
+                        
+                        
+        //            }
+        //        }
+        //        break;
+        //    case NormalAttackStatus.attackStep2:
+        //        {
+        //            if (attackInterval == true)
+        //            {
+        //                fAttackIntervalTimer += Time.deltaTime;
+        //                if (fAttackIntervalTimer >= fAttackInterval)
+        //                {
+        //                    attackInterval = false;
+        //                }
+        //            }
+        //        }
+        //        break;
+        //    case NormalAttackStatus.attackStep3:
+        //        break;
+        //    default:
+        //        break;
+        //}
+        
     }
     public void PlayerFaceDirection()
     {
@@ -133,4 +249,11 @@ public interface CharaterController
     public void Jump();
 }
 
+public enum NormalAttackStatus
+{
+    attackStep0,
+    attackStep1,
+    attackStep2,
+    attackStep3
+}
 
