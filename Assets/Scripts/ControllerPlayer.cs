@@ -5,13 +5,12 @@ using UnityEngine;
 public class ControllerPlayer : MonoBehaviour , CharaterController
 {
     public static ControllerPlayer instance;
-    public Rigidbody2D PlayerRigibody;
-    public Camera mainCamera;
     public float fMaxWalkHorizontalSpeed;
     public float fMaxRunHorizontalSpeed;
     public float fJumpSpeed;
     public float fGroundDistance;
-    private float fCurrentLimitSpeed;
+    [HideInInspector]
+    public float fCurrentLimitSpeed;
     private float fJumpStartPoint;
     public float fAttackInterval;
     public float fLightAttackJudge;
@@ -45,24 +44,23 @@ public class ControllerPlayer : MonoBehaviour , CharaterController
         Jump();
         Move();
         Attack();
-        PlayerFaceDirection();
     }
     private void FixedUpdate()
     {
-        PlayerRigibody.velocity = new Vector2(fCurrentLimitSpeed, PlayerRigibody.velocity.y);
+        
     }
     public void Jump()
     {
-        fGroundDistance = PlayerRigibody.transform.position.y - fJumpStartPoint;
+        fGroundDistance = PlayerStatusMgr.instance.PlayerRigibody.transform.position.y - fJumpStartPoint;
         if (Input.GetButtonDown("Jump") && PlayerStatusMgr.instance.playerStatusGround == StatusGround.onGround)
         {
-            fJumpStartPoint = PlayerRigibody.transform.position.y;
+            fJumpStartPoint = PlayerStatusMgr.instance.PlayerRigibody.transform.position.y;
             Debug.Log("jumping");
-            PlayerRigibody.velocity = new Vector2(PlayerRigibody.velocity.x, fJumpSpeed);
+            PlayerStatusMgr.instance.PlayerRigibody.velocity = new Vector2(PlayerStatusMgr.instance.PlayerRigibody.velocity.x, fJumpSpeed);
         }
         else if (Input.GetButtonUp("Jump"))
         {
-            PlayerRigibody.velocity = PlayerRigibody.velocity * new Vector2(1, .5f);
+            PlayerStatusMgr.instance.PlayerRigibody.velocity = PlayerStatusMgr.instance.PlayerRigibody.velocity * new Vector2(1, .5f);
         }
         if (PlayerStatusMgr.instance.playerStatusGround == StatusGround.onGround)
             fGroundDistance = 0;        
@@ -72,7 +70,8 @@ public class ControllerPlayer : MonoBehaviour , CharaterController
     {
         if (Input.GetButton("Horizontal") && Input.GetAxis("Horizontal") > 0)
         {
-            //PlayerRigibody.transform.localScale = new Vector3(1, 1, 1);
+            AnimationPlayer.instance.ChangePlayerFaceRight(true);
+            PlayerStatusMgr.instance.CheckPlayerStatusBasic(StatusBasic.Move);
             if (Input.GetButton("Run"))
                 fCurrentLimitSpeed = fMaxRunHorizontalSpeed;
             else
@@ -80,7 +79,8 @@ public class ControllerPlayer : MonoBehaviour , CharaterController
         }
         else if (Input.GetButton("Horizontal") && Input.GetAxis("Horizontal") < 0)
         {
-            //PlayerRigibody.transform.localScale = new Vector3(-1, 1, 1);
+            AnimationPlayer.instance.ChangePlayerFaceRight(false);
+            PlayerStatusMgr.instance.CheckPlayerStatusBasic(StatusBasic.Move);
             if (Input.GetButton("Run"))
                 fCurrentLimitSpeed = -fMaxRunHorizontalSpeed;
             else
@@ -88,6 +88,7 @@ public class ControllerPlayer : MonoBehaviour , CharaterController
         }
         else
         {
+            PlayerStatusMgr.instance.CheckPlayerStatusBasic(StatusBasic.Idle);
             Debug.Log("Button was released");
             fCurrentLimitSpeed = 0;            
         }
@@ -173,72 +174,8 @@ public class ControllerPlayer : MonoBehaviour , CharaterController
             }
            
         }
+    }
 
-        
-        //if (Input.GetButtonDown("Fire1")&& attackInterval == false)
-        //{
-        //    AnimationPlayer.instance.CallAttackAnimation("Attack1");
-        //    fAttackIntervalTimer = 0;
-        //    attackInterval = true;
-        //    Debug.Log("Attack!");
-        //}
-        ////設定攻擊間隔
-        //switch (attackStatus)
-        //{
-        //    case NormalAttackStatus.attackStep0:
-        //        break;
-        //    case NormalAttackStatus.attackStep1:
-        //        {
-        //            fAttackIntervalTimer += Time.deltaTime;
-        //            if (fAttackIntervalTimer >= fAttackInterval)
-        //            {
-        //                attackInterval = false;
-        //            }
-        //            if (attackInterval == true)
-        //            {
-                        
-                        
-        //            }
-        //        }
-        //        break;
-        //    case NormalAttackStatus.attackStep2:
-        //        {
-        //            if (attackInterval == true)
-        //            {
-        //                fAttackIntervalTimer += Time.deltaTime;
-        //                if (fAttackIntervalTimer >= fAttackInterval)
-        //                {
-        //                    attackInterval = false;
-        //                }
-        //            }
-        //        }
-        //        break;
-        //    case NormalAttackStatus.attackStep3:
-        //        break;
-        //    default:
-        //        break;
-        //}
-        
-    }
-    public void PlayerFaceDirection()
-    {
-        if (CheckMousePos() >= 0)
-        {
-            Debug.Log("滑鼠在右邊");
-            PlayerRigibody.transform.localScale = new Vector3(1, 1, 1);
-        }
-        else if (CheckMousePos() < 0)
-        {
-            Debug.Log("滑鼠在左邊");
-            PlayerRigibody.transform.localScale = new Vector3(-1, 1, 1);
-        }
-    }
-    public float CheckMousePos()
-    {
-        Vector3 mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-        float value = mousePos.x - PlayerRigibody.transform.position.x;
-        return value;
-    }
 }
 public interface CharaterController
 {

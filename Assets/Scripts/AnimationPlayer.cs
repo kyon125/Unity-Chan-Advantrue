@@ -7,7 +7,6 @@ public class AnimationPlayer : MonoBehaviour
 
     // Start is called before the first frame update
     public static AnimationPlayer instance;
-    public Rigidbody2D playerRigibody;
     public Animator playerAnimator;
     private float fPlayerSpeed;
     private void Awake()
@@ -27,10 +26,18 @@ public class AnimationPlayer : MonoBehaviour
     {
         CheckPlayerWalk();
         CheckPlayerJump();
+        PlayerFaceDirection();
+    }
+    public void ChangePlayerFaceRight(bool isTrue)
+    {
+        if(isTrue)
+            playerAnimator.transform.localScale = new Vector3(1, 1, 1);
+        else
+            playerAnimator.transform.localScale = new Vector3(-1, 1, 1);
     }
     public void CheckPlayerWalk()
     {
-        fPlayerSpeed = playerRigibody.velocity.x;
+        fPlayerSpeed = PlayerStatusMgr.instance.PlayerRigibody.velocity.x;
         if (fPlayerSpeed != 0)
         {
             switch (PlayerStatusMgr.instance.playerStatusGround)
@@ -69,6 +76,22 @@ public class AnimationPlayer : MonoBehaviour
     public void CheckPlayerJump()
     {
         playerAnimator.SetFloat("GroundDistance", ControllerPlayer.instance.fGroundDistance);
-        playerAnimator.SetFloat("FallSpeed", ControllerPlayer.instance.PlayerRigibody.velocity.y);
+        playerAnimator.SetFloat("FallSpeed", PlayerStatusMgr.instance.PlayerRigibody.velocity.y);
+    }
+    public void PlayerFaceDirection()
+    {
+        if (PlayerStatusMgr.instance.playerStatusBasic != StatusBasic.Move)
+        {
+            if (PlayerStatusMgr.instance.CheckMousePos() >= 0)
+            {
+                playerAnimator.transform.localScale = new Vector3(1, 1, 1);
+                Debug.Log("滑鼠在右邊");                
+            }
+            else if (PlayerStatusMgr.instance.CheckMousePos() < 0)
+            {
+                playerAnimator.transform.localScale = new Vector3(-1, 1, 1);
+                Debug.Log("滑鼠在左邊");                
+            }
+        }
     }
 }
