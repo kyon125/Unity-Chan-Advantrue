@@ -10,7 +10,8 @@ public class PlayerStatusMgr : MonoBehaviour
     public PlayerAttributeSO playerAttributeSO;
     public StatusGround playerStatusGround;
     public StatusBasic playerStatusBasic;
-    
+    public StatusSide playerStatusSide;
+
     //public CreatePlayerAttributeSO
     private void Awake()
     {
@@ -28,7 +29,11 @@ public class PlayerStatusMgr : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        PlayerRigibody.velocity = new Vector2(ControllerPlayer.instance.fCurrentLimitSpeed, PlayerRigibody.velocity.y);
+        if(playerStatusSide == StatusSide.Left)
+            PlayerRigibody.velocity = new Vector2(0, PlayerRigibody.velocity.y);
+        else
+            PlayerRigibody.velocity = new Vector2(ControllerPlayer.instance.fCurrentLimitSpeed, PlayerRigibody.velocity.y);
+
     }
     public float CheckMousePos()
     {
@@ -40,6 +45,13 @@ public class PlayerStatusMgr : MonoBehaviour
     {
         playerStatusBasic = status;
     }
+}
+public enum StatusSide
+{
+    None,
+    Left,
+    Right,
+    Both
 }
 //地面上(地面、空中)
 public enum StatusGround
