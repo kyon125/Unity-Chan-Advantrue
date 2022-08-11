@@ -29,8 +29,10 @@ public class PlayerStatusMgr : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if(playerStatusSide == StatusSide.Left)
-            PlayerRigibody.velocity = new Vector2(0, PlayerRigibody.velocity.y);
+        if (playerStatusSide == StatusSide.Left)
+            PlayerRigibody.velocity = new Vector2(Mathf.Clamp(ControllerPlayer.instance.fCurrentLimitSpeed, 0, Mathf.Infinity), PlayerRigibody.velocity.y);
+        else if (playerStatusSide == StatusSide.Right)
+            PlayerRigibody.velocity = new Vector2(Mathf.Clamp(ControllerPlayer.instance.fCurrentLimitSpeed, -Mathf.Infinity, 0), PlayerRigibody.velocity.y);
         else
             PlayerRigibody.velocity = new Vector2(ControllerPlayer.instance.fCurrentLimitSpeed, PlayerRigibody.velocity.y);
 

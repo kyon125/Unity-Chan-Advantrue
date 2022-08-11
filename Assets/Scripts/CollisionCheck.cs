@@ -18,6 +18,11 @@ public class CollisionCheck : MonoBehaviour
     private RaycastHit2D raycastHitLeftCenter;
     private RaycastHit2D raycastHitLeftLeg;
 
+    //¥k°¼¸I¼²ÀË´ú¤T®g½u 
+    private RaycastHit2D raycastHitRightHead;
+    private RaycastHit2D raycastHitRightCenter;
+    private RaycastHit2D raycastHitRightLeg;
+
     [Header ("¸I¼²ÀË´ú¤T®g½u ¥ª ÀÉ ¥k")]
     public Vector2 raycastLeftValue;
     public Vector2 raycastCenterValue;
@@ -28,6 +33,11 @@ public class CollisionCheck : MonoBehaviour
     public Vector2 raycastHitLeftHeadValue;
     public Vector2 raycastHitLeftCenterValue;
     public Vector2 raycastHitLeftLegValue;
+
+    [Header("¥k°¼¸I¼²ÀË´ú¤T®g½u ")]
+    public Vector2 raycastHitRightHeadValue;
+    public Vector2 raycastHitRightCenterValue;
+    public Vector2 raycastHitRightLegValue;
     public float fSideDistance;
 
     void Start()
@@ -39,9 +49,10 @@ public class CollisionCheck : MonoBehaviour
     void Update()
     {
         CreatePlayerCollisionRaycastHit();
-        CreatePlayerSideCollisionRaycastHit();
+        CheckPlayerSideCollision();
         RaycastDrawDebug();
-        RaycastDrawSideDebug();
+        RaycastDrawLeftSideDebug();
+        RaycastDrawRightSideDebug();
     }
     private void CreatePlayerCollisionRaycastHit()
     {
@@ -59,21 +70,39 @@ public class CollisionCheck : MonoBehaviour
             Debug.Log("onGround is false");
         }
     }
-    private void CreatePlayerSideCollisionRaycastHit()
+
+    private void CheckPlayerSideCollision()
+    {
+        if (CreateLeftSideRaycastHit() && CreateRightSideRaycastHit())
+            PlayerStatusMgr.instance.playerStatusSide = StatusSide.Both;
+        else if (!CreateLeftSideRaycastHit() && CreateRightSideRaycastHit())
+            PlayerStatusMgr.instance.playerStatusSide = StatusSide.Right;
+        else if (CreateLeftSideRaycastHit() && !CreateRightSideRaycastHit())
+            PlayerStatusMgr.instance.playerStatusSide = StatusSide.Left;
+        else
+            PlayerStatusMgr.instance.playerStatusSide = StatusSide.None;
+    }
+    private bool CreateLeftSideRaycastHit()
     {
         raycastHitLeftHead = Physics2D.Raycast(new Vector2(player.transform.position.x + raycastHitLeftHeadValue.x, player.transform.position.y + raycastHitLeftHeadValue.y), Vector2.left, fSideDistance, 1 << 8);
         raycastHitLeftCenter = Physics2D.Raycast(new Vector2(player.transform.position.x + raycastHitLeftCenterValue.x, player.transform.position.y + raycastHitLeftCenterValue.y), Vector2.left, fSideDistance, 1 << 8);
-        raycastHitLeftLeg = Physics2D.Raycast(new Vector2(player.transform.position.x + raycastHitLeftLegValue.x, player.transform.position.y + raycastHitLeftLegValue.y), Vector2.left, fSideDistance, 1 << 8);
+        raycastHitLeftLeg = Physics2D.Raycast(new Vector2(player.transform.position.x + raycastHitLeftLegValue.x, player.transform.position.y + raycastHitLeftLegValue.y), Vector2.left, fSideDistance, 1 << 8);       
+
         if (raycastHitLeftHead || raycastHitLeftCenter || raycastHitLeftLeg)
-        {
-            PlayerStatusMgr.instance.playerStatusSide = StatusSide.Left;
-            Debug.Log("Left is wall");
-        }
-        else if (!raycastHitLeftHead && !raycastHitLeftCenter && !raycastHitLeftLeg)
-        {
-            PlayerStatusMgr.instance.playerStatusSide = StatusSide.None;
-            Debug.Log("Left is space");
-        }
+            return true;
+        else
+            return false;
+    }
+    private bool CreateRightSideRaycastHit() 
+    {
+        raycastHitRightHead = Physics2D.Raycast(new Vector2(player.transform.position.x + raycastHitRightHeadValue.x, player.transform.position.y + raycastHitRightHeadValue.y), Vector2.right, fSideDistance, 1 << 8);
+        raycastHitRightCenter = Physics2D.Raycast(new Vector2(player.transform.position.x + raycastHitRightCenterValue.x, player.transform.position.y + raycastHitRightCenterValue.y), Vector2.right, fSideDistance, 1 << 8);
+        raycastHitRightLeg = Physics2D.Raycast(new Vector2(player.transform.position.x + raycastHitRightLegValue.x, player.transform.position.y + raycastHitRightLegValue.y), Vector2.right, fSideDistance, 1 << 8);
+
+        if (raycastHitRightHead || raycastHitRightCenter || raycastHitRightLeg)
+            return true;
+        else
+            return false;
     }
     public void RaycastDrawDebug()
     {
@@ -97,7 +126,7 @@ public class CollisionCheck : MonoBehaviour
         Debug.DrawLine(new Vector3(player.transform.position.x + raycastCenterValue.x, player.transform.position.y + raycastCenterValue.y, 0), new Vector3(player.transform.position.x + raycastCenterValue.x, (player.transform.position.y + raycastCenterValue.y) + fDistanceCenter, 0), centerColor);
         Debug.DrawLine(new Vector3(player.transform.position.x + raycastRightValue.x, player.transform.position.y + raycastRightValue.y, 0), new Vector3(player.transform.position.x + raycastRightValue.x, (player.transform.position.y + raycastRightValue.y) + fDistance, 0), rightColor);
     }
-    public void RaycastDrawSideDebug()
+    public void RaycastDrawLeftSideDebug()
     {
         Color leftColor = new Color();
         Color centerColor = new Color();
@@ -118,5 +147,27 @@ public class CollisionCheck : MonoBehaviour
         Debug.DrawLine(new Vector3(player.transform.position.x + raycastHitLeftHeadValue.x, player.transform.position.y + raycastHitLeftHeadValue.y, 0), new Vector3((player.transform.position.x + raycastHitLeftHeadValue.x) + -fSideDistance, (player.transform.position.y + raycastHitLeftHeadValue.y), 0), leftColor);
         Debug.DrawLine(new Vector3(player.transform.position.x + raycastHitLeftCenterValue.x, player.transform.position.y + raycastHitLeftCenterValue.y, 0), new Vector3((player.transform.position.x + raycastHitLeftCenterValue.x) + -fSideDistance, (player.transform.position.y + raycastHitLeftCenterValue.y), 0), centerColor);
         Debug.DrawLine(new Vector3(player.transform.position.x + raycastHitLeftLegValue.x, player.transform.position.y + raycastHitLeftLegValue.y, 0), new Vector3((player.transform.position.x + raycastHitLeftLegValue.x) + -fSideDistance, (player.transform.position.y + raycastHitLeftLegValue.y), 0), rightColor);
+    }
+    public void RaycastDrawRightSideDebug()
+    {
+        Color leftColor = new Color();
+        Color centerColor = new Color();
+        Color rightColor = new Color();
+        if (raycastHitRightHead)
+            leftColor = Color.green;
+        else
+            leftColor = Color.red;
+        if (raycastHitRightCenter)
+            centerColor = Color.green;
+        else
+            centerColor = Color.red;
+        if (raycastHitRightLeg)
+            rightColor = Color.green;
+        else
+            rightColor = Color.red;
+        //Debug
+        Debug.DrawLine(new Vector3(player.transform.position.x + raycastHitRightHeadValue.x, player.transform.position.y + raycastHitRightHeadValue.y, 0), new Vector3((player.transform.position.x + raycastHitRightHeadValue.x) + fSideDistance, (player.transform.position.y + raycastHitRightHeadValue.y), 0), leftColor);
+        Debug.DrawLine(new Vector3(player.transform.position.x + raycastHitRightCenterValue.x, player.transform.position.y + raycastHitRightCenterValue.y, 0), new Vector3((player.transform.position.x + raycastHitRightCenterValue.x) + fSideDistance, (player.transform.position.y + raycastHitRightCenterValue.y), 0), centerColor);
+        Debug.DrawLine(new Vector3(player.transform.position.x + raycastHitRightLegValue.x, player.transform.position.y + raycastHitRightLegValue.y, 0), new Vector3((player.transform.position.x + raycastHitRightLegValue.x) + fSideDistance, (player.transform.position.y + raycastHitRightLegValue.y), 0), rightColor);
     }
 }

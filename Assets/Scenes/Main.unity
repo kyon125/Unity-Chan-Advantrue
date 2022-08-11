@@ -708,6 +708,9 @@ MonoBehaviour:
   raycastHitLeftHeadValue: {x: 0, y: 0.12}
   raycastHitLeftCenterValue: {x: 0, y: 0}
   raycastHitLeftLegValue: {x: 0, y: -0.17}
+  raycastHitRightHeadValue: {x: 0, y: 0.12}
+  raycastHitRightCenterValue: {x: 0, y: 0}
+  raycastHitRightLegValue: {x: 0, y: -0.17}
   fSideDistance: 0.125
 --- !u!4 &1194122472
 Transform:
@@ -915,10 +918,12 @@ EdgeCollider2D:
   - {x: -3.820103, y: 3.2234206}
   - {x: -1.580116, y: 3.217258}
   - {x: -1.5746377, y: 1.13152}
-  - {x: 5.1315207, y: 1.1315199}
-  - {x: 5.13152, y: -0.13151997}
-  - {x: -4.7166696, y: -0.13152}
-  - {x: -4.8399997, y: -0.13151999}
+  - {x: 2.4875803, y: 1.1315199}
+  - {x: 2.4875798, y: 2.6546674}
+  - {x: 5.0665636, y: 2.6379604}
+  - {x: 5.1348004, y: -0.13152027}
+  - {x: -4.7167206, y: -0.13152}
+  - {x: -4.8399997, y: -0.13152}
   - {x: -5.1315207, y: -0.13152}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
@@ -999,7 +1004,27 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 5, y: 1, z: 0}
+    - position: {x: 2.6191, y: 1, z: 0}
+      leftTangent: {x: 0, y: 0, z: 0}
+      rightTangent: {x: 0, y: 0, z: 0}
+      mode: 0
+      height: 1
+      bevelCutoff: 0
+      bevelSize: 0
+      spriteIndex: 0
+      corner: 1
+      m_CornerMode: 1
+    - position: {x: 2.6191, y: 2.5222898, z: 0}
+      leftTangent: {x: 0, y: 0, z: 0}
+      rightTangent: {x: 0, y: 0, z: 0}
+      mode: 0
+      height: 1
+      bevelCutoff: 0
+      bevelSize: 0
+      spriteIndex: 0
+      corner: 1
+      m_CornerMode: 1
+    - position: {x: 4.938226, y: 2.5072687, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -1091,8 +1116,8 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: 9dc9fcbe42fa93d47a97966a929188c7, type: 3}
   - {fileID: 21300000, guid: 52a0bd25d75fbf048b698a026656f4d1, type: 3}
   m_LocalAABB:
-    m_Center: {x: 0, y: 1.5459895, z: 0}
-    m_Extent: {x: 5.1600003, y: 1.7059895, z: 0}
+    m_Center: {x: 0.0019955635, y: 1.5459893, z: 0}
+    m_Extent: {x: 5.161996, y: 1.7059896, z: 0}
 --- !u!4 &1445020571
 Transform:
   m_ObjectHideFlags: 0
@@ -1589,7 +1614,7 @@ MonoBehaviour:
     ModeOverride: 1
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7194767, y: 1}
+    m_SensorSize: {x: 1.4296875, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
