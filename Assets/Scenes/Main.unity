@@ -699,6 +699,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1786931001}
+  playerCollider2D: {fileID: 1786931006}
   playerRigidbody2D: {fileID: 1786931002}
   raycastLeftValue: {x: -0.07, y: -0.26}
   raycastCenterValue: {x: -0.01, y: -0.26}
@@ -918,12 +919,12 @@ EdgeCollider2D:
   - {x: -3.820103, y: 3.2234206}
   - {x: -1.580116, y: 3.217258}
   - {x: -1.5746377, y: 1.13152}
-  - {x: 2.4875803, y: 1.1315199}
-  - {x: 2.4875798, y: 2.6546674}
-  - {x: 5.0665636, y: 2.6379604}
-  - {x: 5.1348004, y: -0.13152027}
-  - {x: -4.7167206, y: -0.13152}
-  - {x: -4.8399997, y: -0.13152}
+  - {x: 2.4880476, y: 1.1315199}
+  - {x: 2.4909582, y: 1.9460453}
+  - {x: 5.106084, y: 1.9463068}
+  - {x: 5.133251, y: -0.13151991}
+  - {x: -4.7166967, y: -0.13152}
+  - {x: -4.84, y: -0.13152}
   - {x: -5.1315207, y: -0.13152}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
@@ -1014,7 +1015,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 2.6191, y: 2.5222898, z: 0}
+    - position: {x: 2.6220093, y: 1.8145385, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -1024,7 +1025,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 4.938226, y: 2.5072687, z: 0}
+    - position: {x: 4.9762726, y: 1.8147739, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -1116,8 +1117,8 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: 9dc9fcbe42fa93d47a97966a929188c7, type: 3}
   - {fileID: 21300000, guid: 52a0bd25d75fbf048b698a026656f4d1, type: 3}
   m_LocalAABB:
-    m_Center: {x: 0.0019955635, y: 1.5459893, z: 0}
-    m_Extent: {x: 5.161996, y: 1.7059896, z: 0}
+    m_Center: {x: 0.0010523796, y: 1.5459895, z: 0}
+    m_Extent: {x: 5.1610527, y: 1.7059895, z: 0}
 --- !u!4 &1445020571
 Transform:
   m_ObjectHideFlags: 0
@@ -1380,7 +1381,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1786931004}
   - component: {fileID: 1786931002}
-  - component: {fileID: 1786931005}
+  - component: {fileID: 1786931006}
   m_Layer: 0
   m_Name: Charater
   m_TagString: Untagged
@@ -1400,7 +1401,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 0.067871094
+  m_Mass: 0.055993807
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -1426,8 +1427,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1786931005
-BoxCollider2D:
+--- !u!70 &1786931006
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1439,19 +1440,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.013147369, y: -0.024084091}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.44}
-    oldSize: {x: 0.72, y: 0.72}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.1585665, y: 0.42802918}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0, y: -0.03}
+  m_Size: {x: 0.14, y: 0.43}
+  m_Direction: 0
 --- !u!1 &2051154499
 GameObject:
   m_ObjectHideFlags: 0
@@ -1614,7 +1605,7 @@ MonoBehaviour:
     ModeOverride: 1
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.4296875, y: 1}
+    m_SensorSize: {x: 2.5475638, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

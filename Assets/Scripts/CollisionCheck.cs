@@ -6,6 +6,7 @@ public class CollisionCheck : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject player;
+    public Collider2D playerCollider2D;
     public Rigidbody2D playerRigidbody2D;
 
     //¸I¼²ÀË´ú¤T®g½u ¥ª ÀÉ ¥k
@@ -42,17 +43,19 @@ public class CollisionCheck : MonoBehaviour
 
     void Start()
     {
-        Debug.Log(Physics2D.gravity);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(playerRigidbody2D.velocity.y);
         CreatePlayerCollisionRaycastHit();
         CheckPlayerSideCollision();
         RaycastDrawDebug();
         RaycastDrawLeftSideDebug();
         RaycastDrawRightSideDebug();
+        ConnerHitFix();
     }
     private void CreatePlayerCollisionRaycastHit()
     {
@@ -169,5 +172,20 @@ public class CollisionCheck : MonoBehaviour
         Debug.DrawLine(new Vector3(player.transform.position.x + raycastHitRightHeadValue.x, player.transform.position.y + raycastHitRightHeadValue.y, 0), new Vector3((player.transform.position.x + raycastHitRightHeadValue.x) + fSideDistance, (player.transform.position.y + raycastHitRightHeadValue.y), 0), leftColor);
         Debug.DrawLine(new Vector3(player.transform.position.x + raycastHitRightCenterValue.x, player.transform.position.y + raycastHitRightCenterValue.y, 0), new Vector3((player.transform.position.x + raycastHitRightCenterValue.x) + fSideDistance, (player.transform.position.y + raycastHitRightCenterValue.y), 0), centerColor);
         Debug.DrawLine(new Vector3(player.transform.position.x + raycastHitRightLegValue.x, player.transform.position.y + raycastHitRightLegValue.y, 0), new Vector3((player.transform.position.x + raycastHitRightLegValue.x) + fSideDistance, (player.transform.position.y + raycastHitRightLegValue.y), 0), rightColor);
+    }
+
+    public void ConnerHitFix()
+    {
+        switch (PlayerStatusMgr.instance.playerStatusGround)
+        {
+            case StatusGround.onGround:
+                playerCollider2D.offset = new Vector2(playerCollider2D.offset.x, -0.03f);
+                break;
+            case StatusGround.onAir:
+                playerCollider2D.offset = new Vector2(playerCollider2D.offset.x, 0.03F);
+                break;
+            default:
+                break;
+        }
     }
 }
