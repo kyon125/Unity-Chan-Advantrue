@@ -666,6 +666,69 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &1077777478
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1077777480}
+  - component: {fileID: 1077777479}
+  m_Layer: 0
+  m_Name: Test
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1077777479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077777478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8191fef4558ac1641b71c5c0a11b4aab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 1786931001}
+  characterCollider2D: {fileID: 1786931006}
+  characterRigibody2D: {fileID: 1786931002}
+  characterRaycastGroups:
+  - name: Ground
+    raycastOne: {x: -0.07, y: -0.26, z: -0.24}
+    raycastTwo: {x: -0.01, y: -0.26, z: -0.3}
+    raycastThree: {x: 0.04, y: -0.26, z: -0.24}
+    direction: {x: 0, y: -1}
+  - name: Left
+    raycastOne: {x: 0, y: 0.12, z: 0.125}
+    raycastTwo: {x: 0, y: 0, z: 0.125}
+    raycastThree: {x: 0, y: -0.17, z: 0.125}
+    direction: {x: -1, y: 0}
+  - name: Right
+    raycastOne: {x: 0, y: 0.12, z: 0.125}
+    raycastTwo: {x: 0, y: 0, z: 0.125}
+    raycastThree: {x: 0, y: -0.17, z: 0.125}
+    direction: {x: 1, y: 0}
+--- !u!4 &1077777480
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077777478}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1194122470
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,21 +761,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06081046c4ce82b499acc05ca1fd85fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1786931001}
-  playerCollider2D: {fileID: 1786931006}
-  playerRigidbody2D: {fileID: 1786931002}
-  raycastLeftValue: {x: -0.07, y: -0.26}
-  raycastCenterValue: {x: -0.01, y: -0.26}
-  raycastRightValue: {x: 0.04, y: -0.26}
-  fDistance: -0.24
-  fDistanceCenter: -0.3
-  raycastHitLeftHeadValue: {x: 0, y: 0.12}
-  raycastHitLeftCenterValue: {x: 0, y: 0}
-  raycastHitLeftLegValue: {x: 0, y: -0.17}
-  raycastHitRightHeadValue: {x: 0, y: 0.12}
-  raycastHitRightCenterValue: {x: 0, y: 0}
-  raycastHitRightLegValue: {x: 0, y: -0.17}
-  fSideDistance: 0.125
 --- !u!4 &1194122472
 Transform:
   m_ObjectHideFlags: 0
@@ -916,12 +964,12 @@ EdgeCollider2D:
   - {x: -5.1315207, y: -0.13152}
   - {x: -5.13152, y: 1.1315199}
   - {x: -3.8226025, y: 1.1315199}
-  - {x: -3.820103, y: 3.2234206}
-  - {x: -1.580116, y: 3.217258}
+  - {x: -3.820103, y: 3.2234213}
+  - {x: -1.5801154, y: 3.217258}
   - {x: -1.5746377, y: 1.13152}
-  - {x: 2.4880476, y: 1.1315199}
+  - {x: 2.4880471, y: 1.1315199}
   - {x: 2.4909582, y: 1.9460453}
-  - {x: 5.106084, y: 1.9463068}
+  - {x: 5.106083, y: 1.9463068}
   - {x: 5.133251, y: -0.13151991}
   - {x: -4.7166967, y: -0.13152}
   - {x: -4.84, y: -0.13152}
@@ -1117,8 +1165,8 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: 9dc9fcbe42fa93d47a97966a929188c7, type: 3}
   - {fileID: 21300000, guid: 52a0bd25d75fbf048b698a026656f4d1, type: 3}
   m_LocalAABB:
-    m_Center: {x: 0.0010523796, y: 1.5459895, z: 0}
-    m_Extent: {x: 5.1610527, y: 1.7059895, z: 0}
+    m_Center: {x: 0.0010523796, y: 1.54599, z: 0}
+    m_Extent: {x: 5.1610527, y: 1.70599, z: 0}
 --- !u!4 &1445020571
 Transform:
   m_ObjectHideFlags: 0
@@ -1605,7 +1653,7 @@ MonoBehaviour:
     ModeOverride: 1
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.5475638, y: 1}
+    m_SensorSize: {x: 1.5931373, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

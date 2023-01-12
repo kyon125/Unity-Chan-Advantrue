@@ -17,10 +17,10 @@ public class CollisionCheck : IMediatorServant
 
     public CollisionCheck(ISystemMediator mediator) : base(mediator) { }
 
-    public  void Initial(GameObject character, Collider2D characterCollider2D, Rigidbody2D characterRigidbody2D)
+    public  void Initial(GameObject character, Collider2D characterCollider2D, Rigidbody2D characterRigidbody2D, List<RaycastGroup> raycastGroups)
     {
         InitialTarget(character, characterCollider2D, characterRigidbody2D);
-        InitialRay();
+        InitialRay(raycastGroups);
     }
     /// <summary>
     /// 設定射線附加目標
@@ -33,7 +33,8 @@ public class CollisionCheck : IMediatorServant
     /// <summary>
     /// 初始化射線組
     /// </summary>
-    private void InitialRay() {
+    private void InitialRay(List<RaycastGroup> raycastGroups) {
+        RayCast2DGroups = raycastGroups;
         collisionCheckers = new List<ICollisionChecker>();
         for (int i = 0; i < RayCast2DGroups.Count; i++)
         {
@@ -50,7 +51,7 @@ public class CollisionCheck : IMediatorServant
     {
         try
         {
-            return collisionCheckers[RaycastNum].HitCheck(RayCast2DGroups[RaycastNum].RaycastOne, RayCast2DGroups[RaycastNum].RaycastTwo, RayCast2DGroups[RaycastNum].RaycastThree);
+            return collisionCheckers[RaycastNum].HitCheck(RayCast2DGroups[RaycastNum].raycastOne, RayCast2DGroups[RaycastNum].raycastTwo, RayCast2DGroups[RaycastNum].raycastThree, RayCast2DGroups[RaycastNum].direction);
         }
         catch
         {
@@ -105,8 +106,9 @@ public class CollisionCheck : IMediatorServant
 [System.Serializable]
 public class RaycastGroup
 {
-    public string Name;
-    public Vector3 RaycastOne;
-    public Vector3 RaycastTwo;
-    public Vector3 RaycastThree;
+    public string name;
+    public Vector3 raycastOne;
+    public Vector3 raycastTwo;
+    public Vector3 raycastThree;
+    public Vector2 direction;
 }

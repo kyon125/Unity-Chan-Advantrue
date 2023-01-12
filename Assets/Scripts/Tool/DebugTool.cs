@@ -21,7 +21,7 @@ public class DebugTool
 /// <param name="context">Log§∫Æe</param>
 /// <param name="logColor">Log√C¶‚</param>
     public void Show(string context, Color logColor) { 
-        string colorNum = ColorUtility.ToHtmlStringRGB(logColor);
+        string colorNum = ColorUtility.ToHtmlStringRGBA(logColor);
         Debug.Log("<color=" + colorNum + ">" + context + "</color>");
     }
 }

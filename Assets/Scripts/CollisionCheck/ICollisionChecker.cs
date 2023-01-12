@@ -17,7 +17,7 @@ public abstract class ICollisionChecker
         m_CharacterRigidbody2D = rigidbody2D;
         m_Manager = Manager;
     }
-    public abstract bool HitCheck(Vector3 rayParameterOne , Vector3 rayParameterTwo, Vector3 rayParameterThree);
+    public abstract bool HitCheck(Vector3 rayParameterOne , Vector3 rayParameterTwo, Vector3 rayParameterThree, Vector2 direction);
     public  abstract void DrawDebugLine(bool show , Vector3 rayParameterOne, Vector3 rayParameterTwo, Vector3 rayParameterThree);
 }
 public class CollisionCheckerBasic : ICollisionChecker
@@ -25,11 +25,11 @@ public class CollisionCheckerBasic : ICollisionChecker
     public CollisionCheckerBasic(GameObject character, Collider2D collider2D, Rigidbody2D rigidbody2D, CollisionCheck Manager) : base(character, collider2D, rigidbody2D, Manager)
     {
     }
-    public override bool HitCheck(Vector3 rayParameterOne, Vector3 rayParameterTwo, Vector3 rayParameterThree)
+    public override bool HitCheck(Vector3 rayParameterOne, Vector3 rayParameterTwo, Vector3 rayParameterThree , Vector2 direction)
     {
-        raycastHitOne = Physics2D.Raycast(new Vector2(m_Character.transform.position.x + rayParameterOne.x, m_Character.transform.position.y + rayParameterOne.y), Vector2.down, rayParameterOne.z, 1 << 8);
-        raycastHitTwo = Physics2D.Raycast(new Vector2(m_Character.transform.position.x + rayParameterTwo.x, m_Character.transform.position.y + rayParameterTwo.y), Vector2.down, rayParameterTwo.z, 1 << 8);
-        raycastHitThree = Physics2D.Raycast(new Vector2(m_Character.transform.position.x + rayParameterThree.x, m_Character.transform.position.y + rayParameterThree.y), Vector2.down, rayParameterThree.z, 1 << 8);
+        raycastHitOne = Physics2D.Raycast(new Vector2(m_Character.transform.position.x + rayParameterOne.x, m_Character.transform.position.y + rayParameterOne.y), direction, rayParameterOne.z, 1 << 8);
+        raycastHitTwo = Physics2D.Raycast(new Vector2(m_Character.transform.position.x + rayParameterTwo.x, m_Character.transform.position.y + rayParameterTwo.y), direction, rayParameterTwo.z, 1 << 8);
+        raycastHitThree = Physics2D.Raycast(new Vector2(m_Character.transform.position.x + rayParameterThree.x, m_Character.transform.position.y + rayParameterThree.y), direction, rayParameterThree.z, 1 << 8);
         DrawDebugLine(m_Manager.DrawRaycastLine, rayParameterOne, rayParameterTwo, rayParameterThree);
         if (!raycastHitOne && !raycastHitTwo && !raycastHitThree)
             return false;

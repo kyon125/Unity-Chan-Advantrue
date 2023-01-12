@@ -2,12 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
-{
-    [Header("玩家參數")]
-    public GameObject player;
-    public Collider2D playerCollider2D;
-    public Rigidbody2D playerRigibody2D;
+public class PlayerManager : ICharacterManager
+{ 
+
     #region 系統組
     private CharacterSystemMediator characterSystem;
     #endregion
@@ -17,19 +14,19 @@ public class GameManager : MonoBehaviour
         Initial();
     }
     private void Start(){
-        SystemInitial();
+
     }
 
     // Update is called once per frame
     private void Update()
     {
-        
+        SystemUpdate();
     }
     public void Initial() {
-        characterSystem = new CharacterSystemMediator();
+        characterSystem = new CharacterSystemMediator(this);
     }
-    public void SystemInitial()
+    public void SystemUpdate()
     {
-        characterSystem.Initial();
+        DebugTool.Instance.Show(characterSystem.ReturnRayCastResult(0).ToString(), Color.blue);
     }
 }
