@@ -9,5 +9,5 @@ public abstract class ISystemMediator
         m_Manager = manager;
     }
     public abstract void Initial();
-    //public abstract void Update();
+    public abstract void Update();
 }

@@ -7,11 +7,11 @@ public abstract class ICollisionChecker
     protected GameObject m_Character;
     protected Collider2D m_CharacterCollider2D;
     protected Rigidbody2D m_CharacterRigidbody2D;
-    protected CollisionCheck m_Manager;
+    protected CollisionCheckFacade m_Manager;
     protected RaycastHit2D raycastHitOne;
     protected RaycastHit2D raycastHitTwo;
     protected RaycastHit2D raycastHitThree;
-    public ICollisionChecker(GameObject character , Collider2D collider2D , Rigidbody2D rigidbody2D , CollisionCheck Manager) {
+    public ICollisionChecker(GameObject character , Collider2D collider2D , Rigidbody2D rigidbody2D , CollisionCheckFacade Manager) {
         m_Character = character;
         m_CharacterCollider2D = collider2D;
         m_CharacterRigidbody2D = rigidbody2D;
@@ -22,7 +22,7 @@ public abstract class ICollisionChecker
 }
 public class CollisionCheckerBasic : ICollisionChecker
 {
-    public CollisionCheckerBasic(GameObject character, Collider2D collider2D, Rigidbody2D rigidbody2D, CollisionCheck Manager) : base(character, collider2D, rigidbody2D, Manager)
+    public CollisionCheckerBasic(GameObject character, Collider2D collider2D, Rigidbody2D rigidbody2D, CollisionCheckFacade Manager) : base(character, collider2D, rigidbody2D, Manager)
     {
     }
     public override bool HitCheck(Vector3 rayParameterOne, Vector3 rayParameterTwo, Vector3 rayParameterThree , Vector2 direction)

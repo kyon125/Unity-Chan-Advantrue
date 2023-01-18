@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollisionCheck : IMediatorServant
+public class CollisionCheckFacade : IMediatorServant
 {
     private GameObject m_character;
     private Collider2D m_characterCollider2D;
@@ -15,7 +15,7 @@ public class CollisionCheck : IMediatorServant
     public bool DrawRaycastLine { get => _DrawRaycastLine; }
     private bool _DrawRaycastLine;
 
-    public CollisionCheck(ISystemMediator mediator) : base(mediator) { }
+    public CollisionCheckFacade(ISystemMediator mediator) : base(mediator) { }
 
     public  void Initial(GameObject character, Collider2D characterCollider2D, Rigidbody2D characterRigidbody2D, List<RaycastGroup> raycastGroups)
     {
@@ -59,49 +59,6 @@ public class CollisionCheck : IMediatorServant
             throw;
         }
     }
-    //private void CreatePlayerCollisionRaycastHit()
-    //{
-    //    raycastHitLeft = Physics2D.Raycast(new Vector2(player.transform.position.x + raycastLeftValue.x, player.transform.position.y + raycastLeftValue.y), Vector2.down, fDistance, 1 << 8);
-    //    raycastHitCenter = Physics2D.Raycast(new Vector2(player.transform.position.x + raycastCenterValue.x, player.transform.position.y + raycastCenterValue.y), Vector2.down, fDistanceCenter, 1 << 8);
-    //    raycastHitRight = Physics2D.Raycast(new Vector2(player.transform.position.x + raycastRightValue.x, player.transform.position.y + raycastRightValue.y), Vector2.down, fDistance, 1 << 8);
-    //    if (raycastHitLeft || raycastHitCenter || raycastHitRight)
-    //    {
-    //        PlayerStatusMgr.instance.playerStatusGround = StatusGround.onGround;
-    //        Debug.Log("onGround is true");
-    //    }
-    //    else if (!raycastHitLeft && !raycastHitCenter && !raycastHitRight)
-    //    {
-    //        PlayerStatusMgr.instance.playerStatusGround = StatusGround.onAir;
-    //        Debug.Log("onGround is false");
-    //    }
-    //}
-
-    //private void CheckPlayerSideCollision()
-    //{
-    //    if (CreateLeftSideRaycastHit() && CreateRightSideRaycastHit())
-    //        PlayerStatusMgr.instance.playerStatusSide = StatusSide.Both;
-    //    else if (!CreateLeftSideRaycastHit() && CreateRightSideRaycastHit())
-    //        PlayerStatusMgr.instance.playerStatusSide = StatusSide.Right;
-    //    else if (CreateLeftSideRaycastHit() && !CreateRightSideRaycastHit())
-    //        PlayerStatusMgr.instance.playerStatusSide = StatusSide.Left;
-    //    else
-    //        PlayerStatusMgr.instance.playerStatusSide = StatusSide.None;
-    //}
-
-    //public void ConnerHitFix()
-    //{
-    //    switch (PlayerStatusMgr.instance.playerStatusGround)
-    //    {
-    //        case StatusGround.onGround:
-    //            playerCollider2D.offset = new Vector2(playerCollider2D.offset.x, -0.03f);
-    //            break;
-    //        case StatusGround.onAir:
-    //            playerCollider2D.offset = new Vector2(playerCollider2D.offset.x, 0.03F);
-    //            break;
-    //        default:
-    //            break;
-    //    }
-    //}
 }
 [System.Serializable]
 public class RaycastGroup
