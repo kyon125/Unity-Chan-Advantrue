@@ -9,4 +9,5 @@ public abstract class ICharacterManager : MonoBehaviour
     public Collider2D characterCollider2D;
     public Rigidbody2D characterRigibody2D;
     public List<RaycastGroup> characterRaycastGroups;
+    public Animator characterAnimator;
 }

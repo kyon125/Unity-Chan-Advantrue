@@ -7,6 +7,7 @@ public class PlayerManager : ICharacterManager
     public Camera mainCamera;
     #region ¨t²Î²Õ
     private CharacterSystemMediator characterSystem;
+   
     #endregion
     // Start is called before the first frame update
     private void Awake()
@@ -35,8 +36,8 @@ public class PlayerManager : ICharacterManager
     public void SystemUpdate()
     {
         characterSystem.Update();
-        DebugTool.Instance.Show(characterSystem.ReturnRayCastResult(0).ToString(), Color.blue);
-        DebugTool.Instance.Show(characterSystem.GetCharacterStatus().statusGround.ToString(), Color.blue);
+        DebugTool.Instance.ShowLogWithColor(characterSystem.ReturnRayCastResult(0).ToString(), Color.blue);
+        DebugTool.Instance.ShowLogWithColor(characterSystem.GetCharacterStatus().statusGround.ToString(), Color.blue);
     }
     public void ManagerUpdate()
     {
@@ -72,14 +73,28 @@ public class PlayerManager : ICharacterManager
     #region ManagerFixUpdateMethod
     public void LimitCharacterSpeed()
     {
-        StatusSide characterSide = characterSystem.GetCharacterStatus().statusSide;
-        if (characterSide == StatusSide.Left)
-            characterRigibody2D.velocity = new Vector2(Mathf.Clamp(ControllerPlayer.instance.fCurrentLimitSpeed, 0, Mathf.Infinity), characterRigibody2D.velocity.y);
-        else if (characterSide == StatusSide.Right)
-            characterRigibody2D.velocity = new Vector2(Mathf.Clamp(ControllerPlayer.instance.fCurrentLimitSpeed, -Mathf.Infinity, 0), characterRigibody2D.velocity.y);
-        else
-            characterRigibody2D.velocity = new Vector2(ControllerPlayer.instance.fCurrentLimitSpeed, characterRigibody2D.velocity.y);
+        //    StatusSide characterSide = characterSystem.GetCharacterStatus().statusSide;
+        //    if (characterSide == StatusSide.Left)
+        //        characterRigibody2D.velocity = new Vector2(Mathf.Clamp(ControllerPlayer.instance.fCurrentLimitSpeed, 0, Mathf.Infinity), characterRigibody2D.velocity.y);
+        //    else if (characterSide == StatusSide.Right)
+        //        characterRigibody2D.velocity = new Vector2(Mathf.Clamp(ControllerPlayer.instance.fCurrentLimitSpeed, -Mathf.Infinity, 0), characterRigibody2D.velocity.y);
+        //    else
+        //        characterRigibody2D.velocity = new Vector2(ControllerPlayer.instance.fCurrentLimitSpeed, characterRigibody2D.velocity.y);
+        //}
     }
     #endregion
-
+    #region method
+    public void Action_Move(string type)
+    {
+        characterSystem.CharacterMove(type);
+        if(characterSystem.GetCharacterStatus().statusGround == StatusGround.onGround)
+        {
+            characterSystem.SetJumpPosition(character.transform.position);
+        }
+    }    
+    public void Action_MoveCancel(string type)
+    {
+        characterSystem.CharacterMoveCancel(type);
+    }
+    #endregion
 }

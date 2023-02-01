@@ -55,7 +55,7 @@ public class CollisionCheckFacade : IMediatorServant
         }
         catch
         {
-            DebugTool.Instance.Show("You choose 'RaycastNum' return null", Color.red);
+            DebugTool.Instance.ShowLogWithColor("You choose 'RaycastNum' return null", Color.red);
             throw;
         }
     }

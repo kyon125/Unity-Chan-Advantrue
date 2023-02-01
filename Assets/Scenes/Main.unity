@@ -676,6 +676,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1077777480}
   - component: {fileID: 1077777479}
+  - component: {fileID: 1077777481}
   m_Layer: 0
   m_Name: Test
   m_TagString: Untagged
@@ -714,6 +715,8 @@ MonoBehaviour:
     raycastTwo: {x: 0, y: 0, z: 0.125}
     raycastThree: {x: 0, y: -0.17, z: 0.125}
     direction: {x: 1, y: 0}
+  characterAnimator: {fileID: 1646323580}
+  mainCamera: {fileID: 237245177}
 --- !u!4 &1077777480
 Transform:
   m_ObjectHideFlags: 0
@@ -729,6 +732,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1077777481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077777478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7085e38fc95c45447b0527cd1353c31e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 1
+  gameConfig: {fileID: 11400000, guid: 0ef7c1db79bca714399cc2aa770e2605, type: 2}
 --- !u!1 &1194122470
 GameObject:
   m_ObjectHideFlags: 0
@@ -740,7 +757,6 @@ GameObject:
   - component: {fileID: 1194122472}
   - component: {fileID: 1194122473}
   - component: {fileID: 1194122474}
-  - component: {fileID: 1194122475}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -775,20 +791,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af6404d5f92f7f14c90ce1681b0ac9df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fMaxWalkHorizontalSpeed: 2
-  fMaxRunHorizontalSpeed: 4
-  fJumpSpeed: 4
-  fGroundDistance: 0
-  fCurrentLimitSpeed: 0
-  fAttackInterval: 0.4
-  fLightAttackJudge: 0.52
-  fLightAttackJudge2: 0.43
-  fBatterAttackJudge: 0.7
-  fBatterAttackJudge2: 0.7
-  fCancelAttackJudge: 0
-  fAttackIntervalTimer: 0
-  attackInterval: 0
-  attackStatus: 0
+  manager: {fileID: 1077777479}
 --- !u!114 &1194122474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -801,25 +804,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a095a2b8055cae84f88eb63edff644d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 237245177}
-  PlayerRigibody: {fileID: 1786931002}
-  playerAttributeSO: {fileID: 11400000, guid: d69a7c6315b17ec4791a42456f1f6dd1, type: 2}
-  playerStatusGround: 0
-  playerStatusBasic: 0
-  playerStatusSide: 0
---- !u!114 &1194122475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1194122470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 740be3ff557ab6d488408556117fc32b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerAnimator: {fileID: 1646323580}
 --- !u!1 &1275700158
 GameObject:
   m_ObjectHideFlags: 0
@@ -1640,7 +1624,7 @@ MonoBehaviour:
     ModeOverride: 1
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6642157, y: 1}
+    m_SensorSize: {x: 1.7407408, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
