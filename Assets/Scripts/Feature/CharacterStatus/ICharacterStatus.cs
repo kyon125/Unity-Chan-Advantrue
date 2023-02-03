@@ -4,66 +4,52 @@ using UnityEngine;
 
 public abstract class ICharacterStatus
 {
-    public ICharacterStatus(IMediatorServant Facade) { m_Facade = Facade; }
-    protected IMediatorServant m_Facade;
-    protected StatusGround m_characterStatusGround = new StatusGround();
-    protected StatusBasic m_characterStatusBasic = new StatusBasic();
-    protected StatusSide m_characterStatusSide = new StatusSide();
-
-    public abstract void SetCharacterStatusGround(bool ground);
-    public abstract void SetCharacterStatusBasic();
-    public abstract void SetCharacterStatusSide(bool left, bool right);
-    public abstract StatusGround GetCharacterStatusGround();
-    public abstract StatusBasic GetCharacterStatusBasic();
-    public abstract StatusSide GetCharacterStatusSide();
+    protected CharacterStatus m_CharacterStatus;
+    public ICharacterStatus(CharacterStatus characterStatus) { m_CharacterStatus = characterStatus; }
+    public abstract void UpdateCharacterEnvStatus(bool ground, bool left, bool right);    
 }
 public class PlayerStatus : ICharacterStatus
 {
-    public PlayerStatus(CharacterStatusFacade Facade) : base(Facade)
+    public PlayerStatus(CharacterStatus characterStatus) : base(characterStatus)
     {
-        Facade.SetCharater(this);
     }
-
-    public override StatusBasic GetCharacterStatusBasic()
+    /// <summary>
+    /// 更新角色所處環境狀態變化
+    /// </summary>
+    /// <param name="ground"></param>
+    /// <param name="left"></param>
+    /// <param name="right"></param>
+    public override void UpdateCharacterEnvStatus(bool ground, bool left, bool right)
     {
-        return m_characterStatusBasic;
+        SetCharacterStatusGround(ground);
+        SetCharacterStatusSide(left, right);
     }
-
-    public override StatusGround GetCharacterStatusGround()
-    {
-        return m_characterStatusGround;
-    }
-
-    public override StatusSide GetCharacterStatusSide()
-    {
-        return m_characterStatusSide;
-    }
-
-
-    public override void SetCharacterStatusBasic()
+    private void SetCharacterStatusBasic()
     {
         throw new System.NotImplementedException();
     }
 
-    public override void SetCharacterStatusGround(bool ground)
+    private void SetCharacterStatusGround(bool ground)
     {
         if (ground)
-            m_characterStatusGround = StatusGround.onGround;
+            m_CharacterStatus.statusGround = StatusGround.onGround;
         else
-            m_characterStatusGround = StatusGround.onAir;
+            m_CharacterStatus.statusGround = StatusGround.onAir;
     }
 
-    public override void SetCharacterStatusSide(bool left, bool right)
+    private  void SetCharacterStatusSide(bool left, bool right)
     {
         if (left && right)
-            m_characterStatusSide = StatusSide.Both;
+            m_CharacterStatus.statusSide = StatusSide.Both;
         else if (left)
-            m_characterStatusSide = StatusSide.Left;
+            m_CharacterStatus.statusSide = StatusSide.Left;
         else if (right)
-            m_characterStatusSide = StatusSide.Right;
+            m_CharacterStatus.statusSide = StatusSide.Right;
         else
-            m_characterStatusSide = StatusSide.None;
+            m_CharacterStatus.statusSide = StatusSide.None;
     }
+
+ 
 }
 public enum StatusSide
 {
@@ -90,6 +76,13 @@ public enum StatusHurt
     Normal,
     Stark,
     Unbreakable
+}
+[System.Serializable]
+public class CharacterStatus
+{
+    public StatusBasic statusBasic;
+    public StatusGround statusGround;
+    public StatusSide statusSide;
 }
 
 

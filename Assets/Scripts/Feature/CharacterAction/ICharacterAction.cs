@@ -9,9 +9,12 @@ public abstract class ICharacterAction
     {
         m_rigidbody2D = rigidbody2D;
     }
-    public abstract void Move(string type, CharacterStatusFacade.Status status);
+    public abstract void Initial();
+    public abstract void Move(string type, CharacterStatus status);
     public abstract void Jump();
     public abstract void MoveCancel(string type);
+
+    public abstract void Attack(string type);
 }
 public class PlayerAction : ICharacterAction
 {
@@ -20,11 +23,11 @@ public class PlayerAction : ICharacterAction
     {
         Initial();
     }
-    private void Initial()
+    public override void Initial()
     {
         parameter = GameConfig.Instance.gameConfig.parameter;
     }
-    public override void Move(string type, CharacterStatusFacade.Status status)
+    public override void Move(string type, CharacterStatus status)
     {
         float limitSpeed = JudgeLimitSpeed(type , status);
         switch (type)
@@ -89,7 +92,7 @@ public class PlayerAction : ICharacterAction
                 break;
         }
     }
-    private float JudgeLimitSpeed(string type, CharacterStatusFacade.Status status)
+    private float JudgeLimitSpeed(string type, CharacterStatus status)
     {
         float limitSpeed = 0;
         switch (type)
@@ -109,6 +112,16 @@ public class PlayerAction : ICharacterAction
         }
         limitSpeed = GameConfig.Instance.ConvertSpeed(limitSpeed);
         return limitSpeed;
+    }
+
+    public override void Attack(string type)
+    {
+        switch (type)
+        {
+            case "Fire1":
+                DebugTool.Instance.ShowLogWithColor("Fire1 Attack", Color.red);
+                break;
+        }
     }
 }
 

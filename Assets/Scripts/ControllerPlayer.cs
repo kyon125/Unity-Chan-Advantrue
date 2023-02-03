@@ -59,7 +59,7 @@ public class ControllerPlayer :MonoBehaviour
     {
         if (Input.GetButton("Horizontal") && Input.GetAxis("Horizontal") > 0)
         {
-            manager.character.transform.localEulerAngles = new Vector3(0, 0, 0 );
+            manager.basicData.character.transform.localEulerAngles = new Vector3(0, 0, 0 );
             if (Input.GetButton("Run"))
             {
                 manager.Action_Move("Run");
@@ -74,7 +74,7 @@ public class ControllerPlayer :MonoBehaviour
         }
         else if (Input.GetButton("Horizontal") && Input.GetAxis("Horizontal") < 0)
         {
-            manager.character.transform.localEulerAngles = new Vector3(0, 180, 0);
+            manager.basicData.character.transform.localEulerAngles = new Vector3(0, 180, 0);
 
             if (Input.GetButton("Run"))
             {
@@ -97,7 +97,7 @@ public class ControllerPlayer :MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            DebugTool.Instance.ShowLogWithColor("fire" , Color.red);
+            manager.Action_Attack("Fire1");
         }
     }
 

@@ -2,12 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ISystemMediator
+public abstract class ISystemMediator 
 {
-    protected ICharacterManager m_Manager;
-    public ISystemMediator(ICharacterManager manager){
-        m_Manager = manager;
+    protected ISystemFacade m_SystemMediator;
+    public ISystemMediator(ISystemFacade Facade) {
+        m_SystemMediator = Facade;
     }
-    public abstract void Initial();
-    public abstract void Update();
 }

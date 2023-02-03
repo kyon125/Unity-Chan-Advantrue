@@ -6,27 +6,35 @@ public abstract class ICharacterAnimation
 {
     protected float speedX;
     protected float speedY;
+    protected float groundY;
 
-    protected Animator m_CharacterAnimator;
-    public ICharacterAnimation(Animator animator)
+    protected CharacterBasicData m_basicData;
+    public ICharacterAnimation(CharacterBasicData basicData)
     {
-        m_CharacterAnimator = animator;
+        m_basicData = basicData;
     }
+    public abstract void AniUpdate(float groundDistance);
     public abstract void Idle();
 
-    public abstract void Walk(float speedX);
-    public abstract void Jump(float groundDistance, float fallSpeed);
-    public abstract void Attack();
+    public abstract void Walk();
+    public abstract void Jump(float groundDistance);
+    public abstract void Attack(string attackName);
 }
 public class PlayerAnimation : ICharacterAnimation
 {
-    public PlayerAnimation(Animator animator) : base(animator)
+    public PlayerAnimation(CharacterBasicData basicData) : base(basicData)
     {
     }
 
-    public override void Attack()
+    public override void AniUpdate(float groundDistance)
     {
-        m_CharacterAnimator.SetBool("Attack1", true);
+        Jump(groundDistance);
+        Walk();
+    }
+
+    public override void Attack(string attackName)
+    {
+        m_basicData.characterAnimator.SetBool(attackName, true);
     }
 
     public override void Idle()
@@ -34,15 +42,15 @@ public class PlayerAnimation : ICharacterAnimation
 
     }
 
-    public override void Jump(float groundDistance, float fallSpeed)
+    public override void Jump(float groundDistance)
     {
-        m_CharacterAnimator.SetFloat("GroundDistance", groundDistance);
-        m_CharacterAnimator.SetFloat("FallSpeed", fallSpeed);
+        m_basicData.characterAnimator.SetFloat("GroundDistance", groundDistance);
+        m_basicData.characterAnimator.SetFloat("FallSpeed", m_basicData.characterRigibody2D.velocity.y);
     }
 
-    public override void Walk(float speedX)
-    {       
-        m_CharacterAnimator.SetFloat("Speed", Mathf.Abs(speedX / GameConfig.Instance.gameConfig.parameter.maxRunSpeed / 2));
+    public override void Walk()
+    {
+        m_basicData.characterAnimator.SetFloat("Speed", Mathf.Abs(m_basicData.characterRigibody2D.velocity.x / GameConfig.Instance.gameConfig.parameter.maxRunSpeed / 2));
     }
 }
 
