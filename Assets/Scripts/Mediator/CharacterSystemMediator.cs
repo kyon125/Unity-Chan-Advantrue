@@ -15,7 +15,7 @@ public class CharacterSystemMediator : ISystemFacade
     public CharacterSystemMediator(ICharacterManager manager , CharacterBasicData characterBasicData) :base (manager)
     {
         characterData = characterBasicData;
-        characterActionSystem = new PlayerAction(characterBasicData.characterRigibody2D);
+        characterActionSystem = new PlayerAction(characterBasicData);
         collisionCheckSystem = new CollisionCheckerBasic(characterBasicData);
         characterAnimationSystem = new PlayerAnimation(characterBasicData);
         characterStatusSystem = new PlayerStatus(characterBasicData.characterStatus);

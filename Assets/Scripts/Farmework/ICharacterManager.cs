@@ -6,6 +6,7 @@ public abstract class ICharacterManager : MonoBehaviour
 {
     [Header("ª±®a°Ñ¼Æ")]
     public CharacterBasicData basicData;
+    public abstract void Initial();
 }
 [System.Serializable]
 public class CharacterBasicData
@@ -17,5 +18,7 @@ public class CharacterBasicData
     public List<RaycastGroup> characterRaycastGroups;
     public Animator characterAnimator;
     public CharacterStatus characterStatus;
+    public List<Collider2D> characterAttackRange;
+    public CharacterAttributeSO characterAttributeSO;
 }
 

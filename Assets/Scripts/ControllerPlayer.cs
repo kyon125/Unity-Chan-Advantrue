@@ -90,7 +90,7 @@ public class ControllerPlayer :MonoBehaviour
         else
         {
             manager.Action_MoveCancel("Move");
-            DebugTool.Instance.ShowLog("Move button was released");
+            DebugTool.Instance.ShowLog("Move button was released");            
         }
     }
     public void Attack()
@@ -100,6 +100,5 @@ public class ControllerPlayer :MonoBehaviour
             manager.Action_Attack("Fire1");
         }
     }
-
 }
 

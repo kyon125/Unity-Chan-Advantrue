@@ -29,9 +29,10 @@ public class PlayerManager : ICharacterManager
     {
         ManagerFixUpdate();
     }
-    public void Initial()
+    public override void Initial()
     {
         characterSystem = new CharacterSystemMediator(this ,basicData);
+        basicData.characterAttributeSO.Initial();
     }
     public void SystemUpdate()
     {
