@@ -11,13 +11,22 @@ public class CharacterAttributeSO : ScriptableObject
     [SerializeField]
     private CharacterAttribute currentCharacterAttribute;
 
-    public void Attack(int value)
+    public float GetMaxHP()
     {
-        throw new System.NotImplementedException();
+        return currentCharacterAttribute.TargetMaxHP;
+    }
+        public float GetCurrentHP()
+    {
+        return currentCharacterAttribute.TargetHP;
+    }
+    public float GetValueATK()
+    {
+        return currentCharacterAttribute.TartgetATK; 
     }
 
     public void HpAlter(float value)
     {
+        DebugTool.Instance.ShowLog("Ä²µo¦©¼g");
         currentCharacterAttribute.TargetHP = Mathf.Clamp(currentCharacterAttribute.TargetHP + value, 0, 99999);
     }
     public void Initial()
@@ -33,5 +42,7 @@ public class CharacterAttributeSO : ScriptableObject
 public class CharacterAttribute
 {
     public string TargetName = "DefaultName";
+    public float TargetMaxHP = 0;
     public float TargetHP = 0;
+    public float TartgetATK = 0;
 }

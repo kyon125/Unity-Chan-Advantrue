@@ -6,7 +6,7 @@ public class PlayerManager : ICharacterManager
 {
     public Camera mainCamera;
     #region ¨t²Î²Õ
-    private CharacterSystemMediator characterSystem;
+    private CharacterSystemMediator characterSystem; 
    
     #endregion
     // Start is called before the first frame update
@@ -73,17 +73,21 @@ public class PlayerManager : ICharacterManager
     #region ManagerFixUpdateMethod
     #endregion
     #region method
-    public void Action_Move(string type)
+    public override void Action_Move(string type)
     {
         characterSystem.CharacterMove(type);
     }    
-    public void Action_MoveCancel(string type)
+    public override void Action_MoveCancel(string type)
     {
         characterSystem.CharacterMoveCancel(type);
     }
-    public void Action_Attack(string type)
+    public override void Action_Attack(string type)
     {
         characterSystem.CharacterAttack(type);
+    }
+    public override void Action_GetDamage(float damage)
+    {
+        characterSystem.CharacterGetHurt(damage);
     }
     #endregion
 }

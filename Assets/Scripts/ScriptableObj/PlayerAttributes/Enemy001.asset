@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialCharacterAttribute:
     TargetName: BAD-Unity-Chan
+    TargetMaxHP: 10
     TargetHP: 10
+    TartgetATK: 0
   currentCharacterAttribute:
     TargetName: BAD-Unity-Chan
-    TargetHP: -14
+    TargetMaxHP: 10
+    TargetHP: 0
+    TartgetATK: 0

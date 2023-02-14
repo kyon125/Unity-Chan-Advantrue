@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialCharacterAttribute:
     TargetName: Unity-Chan
+    TargetMaxHP: 10
     TargetHP: 10
+    TartgetATK: 1
   currentCharacterAttribute:
-    TargetName: DefaultName
-    TargetHP: 0
+    TargetName: Unity-Chan
+    TargetMaxHP: 10
+    TargetHP: 10
+    TartgetATK: 1

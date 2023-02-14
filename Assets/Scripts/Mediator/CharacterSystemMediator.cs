@@ -10,6 +10,7 @@ public class CharacterSystemMediator : ISystemFacade
     private CollisionCheckerBasic collisionCheckSystem;
     private PlayerAnimation characterAnimationSystem;
     private PlayerStatus characterStatusSystem;
+    private UI_HpBar characterHpBar;
 
 
     public CharacterSystemMediator(ICharacterManager manager , CharacterBasicData characterBasicData) :base (manager)
@@ -19,7 +20,7 @@ public class CharacterSystemMediator : ISystemFacade
         collisionCheckSystem = new CollisionCheckerBasic(characterBasicData);
         characterAnimationSystem = new PlayerAnimation(characterBasicData);
         characterStatusSystem = new PlayerStatus(characterBasicData.characterStatus);
-
+        characterHpBar = new UI_HpBar(characterBasicData.characterAttributeSO, manager.uiSystem);
         Initial();
     }
     public override void Initial()
@@ -65,6 +66,12 @@ public class CharacterSystemMediator : ISystemFacade
     {
         characterActionSystem.Attack(type);
         characterAnimationSystem.Attack("Attack2");
+    }
+    public void CharacterGetHurt(float damage)
+    {
+        characterActionSystem.GetDamage(damage);
+        characterAnimationSystem.GetDamage();
+        characterHpBar.Show();
     }
     #endregion
     #region ¥¼¤ÀÃþ

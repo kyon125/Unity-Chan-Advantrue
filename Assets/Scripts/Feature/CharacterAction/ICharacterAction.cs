@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 public abstract class ICharacterAction
 {
@@ -94,15 +95,17 @@ public class PlayerAction : ICharacterAction
         }
     }
    
-    public override void Attack(string type)
+    public override async void Attack(string type)
     {
         switch (type)
         {
             case "Fire1":
                 DebugTool.Instance.ShowLogWithColor("Fire1 Attack", Color.red);
+                float damage = m_basicData.characterAttributeSO.GetValueATK();
+                await UniTask.Delay(200);
                 foreach (var item in m_basicData.characterAttackRange[0].GetComponent<CheckRangeObj>().GetObjects())
                 {
-                    item.GetComponent<ICharacterManager>().basicData.characterAttributeSO.HpAlter(-1);
+                    item.GetComponent<ICharacterManager>().Action_GetDamage(damage);
                 }
                 break;
         }
@@ -131,7 +134,7 @@ public class PlayerAction : ICharacterAction
 
     public override void GetDamage(float value)
     {
-        m_basicData.characterAttributeSO.HpAlter(value);
+        m_basicData.characterAttributeSO.HpAlter(-value);
     }
 }
 

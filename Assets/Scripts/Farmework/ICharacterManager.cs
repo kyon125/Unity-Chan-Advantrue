@@ -6,7 +6,12 @@ public abstract class ICharacterManager : MonoBehaviour
 {
     [Header("ª±®a°Ñ¼Æ")]
     public CharacterBasicData basicData;
+    public Transform uiSystem;
     public abstract void Initial();
+    public abstract void Action_Move(string type);
+    public abstract void Action_MoveCancel(string type);
+    public abstract void Action_Attack(string type);
+    public abstract void Action_GetDamage(float damage);
 }
 [System.Serializable]
 public class CharacterBasicData

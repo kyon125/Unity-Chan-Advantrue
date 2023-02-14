@@ -19,6 +19,7 @@ public abstract class ICharacterAnimation
     public abstract void Walk();
     public abstract void Jump(float groundDistance);
     public abstract void Attack(string attackName);
+    public abstract void GetDamage();
 }
 public class PlayerAnimation : ICharacterAnimation
 {
@@ -35,6 +36,13 @@ public class PlayerAnimation : ICharacterAnimation
     public override void Attack(string attackName)
     {
         m_basicData.characterAnimator.SetBool(attackName, true);
+    }
+
+    public override void GetDamage()
+    {
+        m_basicData.characterAnimator.SetBool("Damage", true);
+        if (m_basicData.characterAttributeSO.GetCurrentHP() <= 0)
+            m_basicData.characterAnimator.SetBool("IsDead", true);
     }
 
     public override void Idle()
