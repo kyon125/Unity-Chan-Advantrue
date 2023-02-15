@@ -23,6 +23,7 @@ public class CharacterSystemMediator : ISystemFacade
         characterHpBar = new UI_HpBar(characterBasicData.characterAttributeSO, manager.uiSystem);
         Initial();
     }
+
     public override void Initial()
     { 
       
@@ -32,8 +33,6 @@ public class CharacterSystemMediator : ISystemFacade
         UpdateCharacterBasicalStatus();
         UpdateCharacterAni();
     }
-    #region CollisionCheck
-    #endregion
     #region CharacterStatusFacade
     public void UpdateCharacterBasicalStatus()
     {
@@ -73,9 +72,6 @@ public class CharacterSystemMediator : ISystemFacade
         characterAnimationSystem.GetDamage();
         characterHpBar.Show();
     }
-    #endregion
-    #region ¥¼¤ÀÃþ
-
     #endregion
 }
 

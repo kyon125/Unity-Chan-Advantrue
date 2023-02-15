@@ -137,4 +137,59 @@ public class PlayerAction : ICharacterAction
         m_basicData.characterAttributeSO.HpAlter(-value);
     }
 }
+#region monsterAction
+public class MonsterAction : ICharacterAction
+{
+    public MonsterAction(CharacterBasicData basicData) : base(basicData)
+    {     
+
+    }
+
+    public override void Attack(string type)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void GetDamage(float value)
+    {
+        m_basicData.characterAttributeSO.HpAlter(-value);
+    }
+
+    public override void Initial()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void Jump()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void Move(string type, CharacterStatus status)
+    {
+        if (Mathf.Abs(m_basicData.character.transform.localEulerAngles.y) == 180)
+        {
+            if (m_basicData.characterRigibody2D.velocity.x > -2)
+            {
+                m_basicData.characterRigibody2D.AddForce(new Vector2(-GameConfig.Instance.ConvertSpeed(1), 0));
+            }
+            m_basicData.characterRigibody2D.velocity = new Vector2(-Mathf.Clamp(Mathf.Abs(m_basicData.characterRigibody2D.velocity.x), 0, 2), m_basicData.characterRigibody2D.velocity.y);
+        }
+        else
+        {
+            if (m_basicData.characterRigibody2D.velocity.x < 2)
+            {
+                m_basicData.characterRigibody2D.AddForce(new Vector2(GameConfig.Instance.ConvertSpeed(1), 0));
+            }
+            m_basicData.characterRigibody2D.velocity = new Vector2(Mathf.Clamp(Mathf.Abs(m_basicData.characterRigibody2D.velocity.x), 0, 2), m_basicData.characterRigibody2D.velocity.y);
+        }
+    }
+
+    public override void MoveCancel(string type)
+    {
+        m_basicData.characterRigibody2D.velocity *= new Vector2(0.5f, 1);
+    }
+}
+#endregion
+
 

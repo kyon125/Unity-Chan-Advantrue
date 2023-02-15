@@ -17,8 +17,7 @@ public class UI_HpBar : IUIFeature
     }
 
     public override void Show()
-    {
-        
+    {        
         float precentHP =(float) (m_CharacterData.GetCurrentHP() / m_CharacterData.GetMaxHP());
         DebugTool.Instance.ShowLog("¦©¼g°Êµe" + precentHP); 
         DOTween.To(() => imHpMain.fillAmount, X => imHpMain.fillAmount = X, precentHP, 0.2F); 
