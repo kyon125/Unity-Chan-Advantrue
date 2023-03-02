@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -72,5 +72,15 @@ public class MonsterSystemMediator : ISystemFacade
         characterAnimationSystem.GetDamage();
         characterHpBar.Show();
     }
+
+    public IEnumerator IECharacterDead()
+    {
+        UnityEngine.Object.Destroy(characterData.characterRigibody2D);
+        UnityEngine.Object.Destroy(characterData.characterCollider2D);
+        yield return new WaitForSeconds(2f);
+        DebugTool.Instance.ShowLog("清理屍體");
+        UnityEngine.Object.Destroy(characterData.character);
+    }
     #endregion
+
 }

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -19,7 +19,7 @@ public class UI_HpBar : IUIFeature
     public override void Show()
     {        
         float precentHP =(float) (m_CharacterData.GetCurrentHP() / m_CharacterData.GetMaxHP());
-        DebugTool.Instance.ShowLog("¦©¼g°Êµe" + precentHP); 
+        DebugTool.Instance.ShowLog("æ‰£å¯«å‹•ç•«" + precentHP); 
         DOTween.To(() => imHpMain.fillAmount, X => imHpMain.fillAmount = X, precentHP, 0.2F); 
     }
 }

@@ -1,11 +1,11 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MonsterManager : ICharacterManager
 {
     public Camera mainCamera;
-    #region ¨t²Î²Õ
+    #region ç³»çµ±çµ„
     private MonsterSystemMediator characterSystem;
 
     #endregion
@@ -22,12 +22,18 @@ public class MonsterManager : ICharacterManager
     // Update is called once per frame
     private void Update()
     {
-        SystemUpdate();
-        ManagerUpdate();
+        if (basicData.characterAttributeSO.GetCurrentHP() > 0)
+        {
+            SystemUpdate();
+            ManagerUpdate();
+        }
     }
     private void FixedUpdate()
     {
-        ManagerFixUpdate();
+        if (basicData.characterAttributeSO.GetCurrentHP() > 0)
+        {
+            ManagerFixUpdate();
+        }
     }
     public override void Initial()
     {
@@ -88,6 +94,10 @@ public class MonsterManager : ICharacterManager
     public override void Action_GetDamage(float damage)
     {
         characterSystem.CharacterGetHurt(damage);
+    }
+    public override void Action_Dead()
+    {
+        StartCoroutine(characterSystem.IECharacterDead());
     }
     #endregion
 }

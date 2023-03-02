@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +9,7 @@ public abstract class ICollisionChecker
     protected RaycastHit2D raycastHitTwo;
     protected RaycastHit2D raycastHitThree;
     /// <summary>
-    /// ¨C¤@­ÓVector3¤À§O¥Nªí: °_©lÂIªºx , °_©lÂIªºy , ®g½u¶ZÂ÷ ¡A¨C²Õ®g½u¬°¤T±ø¡C
+    /// æ¯ä¸€å€‹Vector3åˆ†åˆ¥ä»£è¡¨: èµ·å§‹é»çš„x , èµ·å§‹é»çš„y , å°„ç·šè·é›¢ ï¼Œæ¯çµ„å°„ç·šç‚ºä¸‰æ¢ã€‚
     /// </summary>
     protected List<RaycastGroup> RayCast2DGroups;
     protected List<ICollisionChecker> collisionCheckers;
@@ -24,16 +24,16 @@ public abstract class ICollisionChecker
 public class CollisionCheckerBasic : ICollisionChecker
 {
     /// <summary>
-    /// ³]©w®g½uªş¥[¥Ø¼Ğ
+    /// è¨­å®šå°„ç·šé™„åŠ ç›®æ¨™
     /// </summary>
     /// <summary>
-    /// ªì©l¤Æ®g½u²Õ
+    /// åˆå§‹åŒ–å°„ç·šçµ„
     /// </summary>
     public CollisionCheckerBasic(CharacterBasicData basicData) : base(basicData)
     {
     }
     /// <summary>
-    /// ¦^¶Ç¿ï¾Üªº®g½u²ÕÀË´úµ²ªG
+    /// å›å‚³é¸æ“‡çš„å°„ç·šçµ„æª¢æ¸¬çµæœ
     /// </summary>
     /// <param name="RaycastNum"></param>
     /// <returns></returns>

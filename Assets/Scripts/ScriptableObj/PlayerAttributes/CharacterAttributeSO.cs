@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
@@ -26,7 +26,7 @@ public class CharacterAttributeSO : ScriptableObject
 
     public void HpAlter(float value)
     {
-        DebugTool.Instance.ShowLog("Ä²µo¦©¼g");
+        DebugTool.Instance.ShowLog("è§¸ç™¼æ‰£å¯«");
         currentCharacterAttribute.TargetHP = Mathf.Clamp(currentCharacterAttribute.TargetHP + value, 0, 99999);
     }
     public void Initial()

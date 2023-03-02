@@ -360,7 +360,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 237245175}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.10000014, z: -2.6599998}
+  m_LocalPosition: {x: 0.33266354, y: -0.10000014, z: -2.6599998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1060,9 +1060,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _parentBlackboard: {fileID: 0}
-  _serializedBlackboard: '{"_variables":{}}'
-  _objectReferences: []
-  _serializedVariables: []
+  _serializedBlackboard: '{"_variables":{"dataManager":{"_value":1,"_name":"dataManager","_id":"ba29760c-b55d-4014-977f-3373f2beff5c","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.MonoBehaviour,
+    UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"myTransform":{"_value":2,"_name":"myTransform","_id":"6df84a9a-38db-4377-b7d8-75ef360a1691","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.Transform,
+    UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}}}'
+  _objectReferences:
+  - {fileID: 0}
+  - {fileID: 1630956747}
+  - {fileID: 1630956746}
+  _serializedVariables:
+  - _json: '{"_value":1,"_name":"dataManager","_id":"ba29760c-b55d-4014-977f-3373f2beff5c","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.MonoBehaviour,
+      UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}'
+    _references:
+    - {fileID: 0}
+    - {fileID: 1630956747}
+  - _json: '{"_value":1,"_name":"myTransform","_id":"6df84a9a-38db-4377-b7d8-75ef360a1691","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.Transform,
+      UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}'
+    _references:
+    - {fileID: 0}
+    - {fileID: 1630956746}
 --- !u!114 &822901332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1246,7 +1261,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -68.41992, y: 40.19995}
+  m_AnchoredPosition: {x: -68.420166, y: 40.19995}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &970944972
@@ -5231,22 +5246,6 @@ MonoBehaviour:
     characterAttributeSO: {fileID: 11400000, guid: a3b38d19f7601e5459e3bdebe1315926, type: 2}
   uiSystem: {fileID: 1301083238}
   mainCamera: {fileID: 0}
---- !u!70 &1630956748
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1630956742}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.03}
-  m_Size: {x: 0.14, y: 0.43}
-  m_Direction: 0
 --- !u!95 &1646323580 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 2389020054404219693, guid: 66a43cf56ad12314f925b8f2226f5f68, type: 3}
@@ -6051,7 +6050,7 @@ MonoBehaviour:
     ModeOverride: 1
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7782656, y: 1}
+    m_SensorSize: {x: 2.8592966, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

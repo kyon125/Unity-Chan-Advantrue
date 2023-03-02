@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NodeCanvas.Framework;
@@ -18,12 +18,12 @@ public class BasicalEnemyCondition : ConditionTask
         if (rangeObj.GetObjects().Count > 0)
         {
             manager.Action_MoveCancel("Walk");
-            DebugTool.Instance.ShowLog("¦³¥i¥H§ğÀ»¥Ø¼Ğ");
+            DebugTool.Instance.ShowLog("æœ‰å¯ä»¥æ”»æ“Šç›®æ¨™");
             return true;
         }
         else
         {
-            DebugTool.Instance.ShowLog("¨S¦³§ğÀ»¥Ø¼Ğ");
+            DebugTool.Instance.ShowLog("æ²’æœ‰æ”»æ“Šç›®æ¨™");
             return false;
         }           
     }

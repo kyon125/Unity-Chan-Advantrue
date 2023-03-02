@@ -1,11 +1,11 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CheckRangeObj : MonoBehaviour
 {
     /// <summary>
-    /// ¦pªG¤Ä¿ï¡A¬OtargetTagªºª«¥ó«h¤£·|³Q¥[¤J§P©w
+    /// å¦‚æœå‹¾é¸ï¼Œæ˜¯targetTagçš„ç‰©ä»¶å‰‡ä¸æœƒè¢«åŠ å…¥åˆ¤å®š
     /// </summary>
     public bool isExcept;
     public List<string> targetTag;

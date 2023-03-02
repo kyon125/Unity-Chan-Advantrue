@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,10 +28,10 @@ public class DebugTool
         Debug.LogError(context);
     }
     /// <summary>
-    /// Ω’•ŒLog
+    /// Ë™øÁî®Log
     /// </summary>
-    /// <param name="context">Log§∫Æe</param>
-    /// <param name="logColor">Log√C¶‚</param>
+    /// <param name="context">LogÂÖßÂÆπ</param>
+    /// <param name="logColor">LogÈ°èËâ≤</param>
     public void ShowLogWithColor(string context, Color logColor) { 
         string colorNum = ColorUtility.ToHtmlStringRGB(logColor);
         Debug.Log("<color=#" + colorNum + ">" + context + "</color>");

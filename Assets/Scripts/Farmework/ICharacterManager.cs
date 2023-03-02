@@ -1,10 +1,10 @@
-using System.Collections;
+锘縰sing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class ICharacterManager : MonoBehaviour
 {
-    [Header("產把计")]
+    [Header("鐜╁鍙冩暩")]
     public CharacterBasicData basicData;
     public Transform uiSystem;
     public abstract void Initial();
@@ -12,11 +12,12 @@ public abstract class ICharacterManager : MonoBehaviour
     public abstract void Action_MoveCancel(string type);
     public abstract void Action_Attack(string type);
     public abstract void Action_GetDamage(float damage);
+    public abstract void Action_Dead();
 }
 [System.Serializable]
 public class CharacterBasicData
 {
-    [Header("產把计")]
+    [Header("鐜╁鍙冩暩")]
     public GameObject character;
     public Collider2D characterCollider2D;
     public Rigidbody2D characterRigibody2D;

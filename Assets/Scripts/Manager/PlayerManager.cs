@@ -1,11 +1,11 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerManager : ICharacterManager
 {
     public Camera mainCamera;
-    #region ¨t²Î²Õ
+    #region ç³»çµ±çµ„
     private CharacterSystemMediator characterSystem; 
    
     #endregion
@@ -88,6 +88,11 @@ public class PlayerManager : ICharacterManager
     public override void Action_GetDamage(float damage)
     {
         characterSystem.CharacterGetHurt(damage);
+    }
+
+    public override void Action_Dead()
+    {
+        throw new System.NotImplementedException();
     }
     #endregion
 }

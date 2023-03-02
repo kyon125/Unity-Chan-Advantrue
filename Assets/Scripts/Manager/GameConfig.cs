@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,7 @@ public class GameConfig : Singleton<GameConfig>
     public GameConfigSO gameConfig;
 
     /// <summary>
-    /// ³]©w¦³Ãö³t«×®É¡A¥²¶·±a¤J¤½¦¡
+    /// è¨­å®šæœ‰é—œé€Ÿåº¦æ™‚ï¼Œå¿…é ˆå¸¶å…¥å…¬å¼
     /// </summary>
     public float ConvertSpeed(float initialSpeed)
     {
@@ -17,10 +17,10 @@ public class GameConfig : Singleton<GameConfig>
 [System.Serializable]
 public class ConfigParameter
 {
-    [Header("Àô¹Ò°Ñ¼Æ")]
+    [Header("ç’°å¢ƒåƒæ•¸")]
     public float DeltaX;
     public float DeltaY;
-    [Header("ª±®a°Ñ¼Æ³]©w")]
+    [Header("ç©å®¶åƒæ•¸è¨­å®š")]
     public float maxWalkSpeed;
     public float maxRunSpeed;
     public float addWalkSpeed;
